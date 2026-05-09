@@ -1,0 +1,256 @@
+/* Treatment B · Editorial Masthead — ported from Claude Design canvas
+   Design tokens: Source Serif 4 body, Inter chrome, ink-blue accent,
+   warm-gray cream background, full-width rule under masthead. */
+
+:root {
+  --bg: #faf8f0;
+  --fg: #161616;
+  --muted: #8a857c;
+  --nav-muted: #6a6660;
+  --rule: rgba(22, 22, 22, 0.18);
+  --rule-soft: rgba(22, 22, 22, 0.12);
+  --accent: #234c7c;
+  --max-width: 620px;
+  --serif: 'Source Serif 4', Charter, 'Iowan Old Style', Georgia, serif;
+  --sans: 'Inter', -apple-system, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 18px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--serif);
+  font-feature-settings: 'kern', 'liga';
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ── Masthead header ────────────────────────────────────────── */
+
+header {
+  padding: 32px 72px 0;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+
+.wordmark {
+  font-family: var(--sans);
+  font-size: 18px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--fg);
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.wordmark:hover {
+  color: var(--accent);
+}
+
+.nav {
+  display: flex;
+  gap: 32px;
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--nav-muted);
+}
+
+.nav a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.nav a:hover {
+  color: var(--accent);
+}
+
+.fullrule {
+  margin-top: 22px;
+  border-top: 1px solid var(--rule);
+}
+
+/* ── Centered reading column ────────────────────────────────── */
+
+main {
+  width: var(--max-width);
+  max-width: calc(100% - 48px);
+  margin: 110px auto 0;
+  padding: 0 24px;
+  min-height: 60vh;
+}
+
+/* ── Homepage hero ──────────────────────────────────────────── */
+
+.hero {
+  font-size: 26px;
+  line-height: 1.42;
+  letter-spacing: -0.012em;
+  font-weight: 400;
+  color: var(--fg);
+  margin: 0;
+}
+
+.hero .accent {
+  color: var(--accent);
+}
+
+/* ── Numbered essay list ────────────────────────────────────── */
+
+.essays {
+  margin-top: 96px;
+}
+
+.essays h2 {
+  font-family: var(--sans);
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 500;
+  margin: 0 0 22px;
+}
+
+.essay-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.essay-list li {
+  display: grid;
+  grid-template-columns: 38px 1fr auto;
+  gap: 16px;
+  align-items: baseline;
+  padding: 14px 0;
+  border-top: 1px solid var(--rule-soft);
+  font-size: 17px;
+  line-height: 1.35;
+}
+
+.essay-list li:last-child {
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.essay-list .num {
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.essay-list .title {
+  color: var(--fg);
+  text-decoration: none;
+}
+
+.essay-list .title:hover {
+  color: var(--accent);
+}
+
+.essay-list .year {
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Article pages (essays, about) ──────────────────────────── */
+
+article h1 {
+  font-size: 32px;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  margin-bottom: 36px;
+  font-weight: 500;
+}
+
+article p {
+  font-size: 18px;
+  line-height: 1.65;
+  margin-bottom: 1.4em;
+}
+
+article em {
+  font-style: italic;
+}
+
+article strong {
+  font-weight: 600;
+}
+
+/* ── Footer ─────────────────────────────────────────────────── */
+
+footer {
+  margin: 96px auto 48px;
+  width: var(--max-width);
+  max-width: calc(100% - 48px);
+  padding: 22px 24px 0;
+  border-top: 1px solid var(--rule-soft);
+  color: var(--muted);
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ── Mobile ─────────────────────────────────────────────────── */
+
+@media (max-width: 720px) {
+  header {
+    padding: 24px 24px 0;
+  }
+
+  .wordmark {
+    font-size: 14px;
+    letter-spacing: 0.20em;
+  }
+
+  .nav {
+    font-size: 10px;
+    gap: 20px;
+  }
+
+  main {
+    margin-top: 64px;
+  }
+
+  .hero {
+    font-size: 22px;
+    line-height: 1.4;
+  }
+
+  .essays {
+    margin-top: 72px;
+  }
+
+  .essay-list li {
+    grid-template-columns: 28px 1fr auto;
+    gap: 12px;
+    font-size: 16px;
+  }
+
+  article h1 {
+    font-size: 26px;
+  }
+}

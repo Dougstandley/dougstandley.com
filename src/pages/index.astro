@@ -1,0 +1,32 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const essays = await getCollection('essays', ({ data }) => data.status === 'published');
+essays.sort((a, b) => {
+  const da = a.data.published?.valueOf() ?? 0;
+  const db = b.data.published?.valueOf() ?? 0;
+  return db - da;
+});
+---
+
+<BaseLayout title="Doug Standley">
+  <p class="hero">
+    Most AI fails at the point of human adoption. I work where emerging technology meets human reality<span class="accent"> — </span>inside institutions, where it breaks.
+  </p>
+
+  {essays.length > 0 && (
+    <section class="essays">
+      <h2>Recent essays</h2>
+      <ol class="essay-list">
+        {essays.map((essay, i) => (
+          <li>
+            <span class="num">{String(i + 1).padStart(2, '0')}</span>
+            <a class="title" href={`/essays/${essay.id}`}>{essay.data.title}</a>
+            <span class="year">{essay.data.published?.getFullYear() ?? ''}</span>
+          </li>
+        ))}
+      </ol>
+    </section>
+  )}
+</BaseLayout>
