@@ -137,7 +137,7 @@ main {
 
 .essay-list li {
   display: grid;
-  grid-template-columns: 38px 1fr auto;
+  grid-template-columns: 1fr auto;
   gap: 16px;
   align-items: baseline;
   padding: 14px 0;
@@ -148,14 +148,6 @@ main {
 
 .essay-list li:last-child {
   border-bottom: 1px solid var(--rule-soft);
-}
-
-.essay-list .num {
-  font-family: var(--sans);
-  font-size: 11px;
-  letter-spacing: 0.06em;
-  color: var(--muted);
-  font-variant-numeric: tabular-nums;
 }
 
 .essay-list .title {
@@ -245,7 +237,6 @@ footer {
   }
 
   .essay-list li {
-    grid-template-columns: 28px 1fr auto;
     gap: 12px;
     font-size: 16px;
   }

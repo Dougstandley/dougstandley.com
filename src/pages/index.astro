@@ -18,15 +18,14 @@ essays.sort((a, b) => {
   {essays.length > 0 && (
     <section class="essays">
       <h2>Recent essays</h2>
-      <ol class="essay-list">
-        {essays.map((essay, i) => (
+      <ul class="essay-list">
+        {essays.map((essay) => (
           <li>
-            <span class="num">{String(i + 1).padStart(2, '0')}</span>
             <a class="title" href={`/essays/${essay.id}`}>{essay.data.title}</a>
             <span class="year">{essay.data.published?.getFullYear() ?? ''}</span>
           </li>
         ))}
-      </ol>
+      </ul>
     </section>
   )}
 </BaseLayout>
