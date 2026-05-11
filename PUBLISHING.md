@@ -1,5 +1,7 @@
 # Publishing Essays — dougstandley.com
 
+_Last updated: 2026-05-11_
+
 Reference for adding new essays to this site. Lives at the repo root so it travels with the project.
 
 ## File location
@@ -83,9 +85,10 @@ Tasks:
 1. Verify the frontmatter matches the schema in src/content.config.ts. Allowed fields only: title, description (optional), status (must be "published" to ship), published (YYYY-MM-DD), started (optional). Reject any other fields and flag them before proceeding.
 2. Write the essay file at src/content/essays/<slug>.md.
 3. Run `npm run build` against a working copy to verify the build is clean. Do NOT run `npm run dev` — that's a local dev server, not a build verification.
-4. After the build passes, give me the three terminal commands to commit and push (cd, git add, git commit -m "Publish <title>", git push). I'll run them myself from my Mac.
-5. Do NOT push from the sandbox. Do NOT modify any files other than the new essay file. Do not change styles, layouts, schema, or other essays.
-6. Do NOT clone or pull the repo — the project is already in my workspace folder, accessible via the file tools.
+4. If `npm run build` fails, show me the full error output and stop. Do not attempt to fix the failure without confirmation.
+5. After the build passes, give me the three terminal commands to commit and push (cd, git add, git commit -m "Publish <title>", git push). I'll run them myself from my Mac.
+6. Do NOT push from the sandbox. Do NOT modify any files other than the new essay file. Do not change styles, layouts, schema, or other essays.
+7. Do NOT clone or pull the repo — the project is already in my workspace folder, accessible via the file tools.
 ```
 
 ## Troubleshooting
