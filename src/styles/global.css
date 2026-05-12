@@ -191,6 +191,31 @@ article strong {
   font-weight: 600;
 }
 
+article a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+article a:hover {
+  text-decoration: none;
+}
+
+article hr {
+  border: 0;
+  margin: 3em 0;
+  text-align: center;
+  height: auto;
+}
+
+article hr::after {
+  content: "· · ·";
+  color: var(--muted);
+  font-size: 1.2em;
+  letter-spacing: 0.5em;
+}
+
 /* ── Footer ─────────────────────────────────────────────────── */
 
 footer {
