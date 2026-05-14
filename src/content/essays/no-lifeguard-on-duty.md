@@ -3,6 +3,7 @@ title: "No Lifeguard on Duty"
 description: "Most people read the sign as a warning. I read it as orientation."
 status: published
 published: 2026-05-10
+tags: [identity]
 ---
 
 There is a sign I keep returning to:

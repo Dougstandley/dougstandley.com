@@ -3,6 +3,7 @@ title: "The Interruption"
 description: "The virus arrived in a man who was already losing something."
 status: published
 published: 2026-05-13
+tags: [identity, transformation]
 ---
 In August 2019, Google walked.
 

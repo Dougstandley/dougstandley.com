@@ -3,6 +3,7 @@ title: "The Last 5%"
 description: "The last 5% of AI deployment is where value, risk, and accountability concentrate. It is where institutions reveal themselves — and where AI systems fail."
 status: published
 published: 2026-05-11
+tags: [agentic-ux, governance]
 ---
 
 Where institutions reveal themselves — and AI systems fail.

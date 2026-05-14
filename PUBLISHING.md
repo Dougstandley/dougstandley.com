@@ -48,8 +48,29 @@ Body in markdown starts here.
 | `status` | Yes (effectively) | `draft` or `published` | Defaults to `draft` if omitted. Drafts route locally but never appear on the homepage or in production. Must be `published` to ship. |
 | `published` | No (recommended) | date `YYYY-MM-DD` | Drives reverse-chronological sort on the homepage. Without it the essay sorts last. |
 | `started` | No | date `YYYY-MM-DD` | Personal tracking only. Not displayed. |
+| `tags` | No (recommended) | array of strings, vocabulary-constrained | One to three tags from the canonical vocabulary (see § Tags). Out-of-vocabulary values fail validation. |
 
-Fields like `date`, `pubDate`, `slug`, `tags`, `categories`, `heroImage`, `author` are not in the schema and will fail validation. If you need a new field, extend `src/content.config.ts` first.
+Fields like `date`, `pubDate`, `slug`, `categories`, `heroImage`, `author` are not in the schema and will fail validation. If you need a new field, extend `src/content.config.ts` first.
+
+## Tags
+
+_Vocabulary established 2026-05-14 as part of v.1.0. Provisional — may be revised as the corpus matures._
+
+The canonical tag vocabulary contains four values:
+
+- `agentic-ux` — the human-system interface where AI deployment succeeds or fails (adoption, accountability, last-mile reality)
+- `governance` — institutional structures, oversight, decision rights, accountability frameworks
+- `transformation` — economic and institutional transition, including the conditions and constraints around it
+- `identity` — posture, sovereignty, and selfhood under technological and institutional pressure
+
+**Rules:**
+
+1. **Closed vocabulary.** Only the four values above are valid. The list is enforced at build time via `z.enum()` in `src/content.config.ts`. Adding a tag means amending the vocabulary in the schema and documenting the change here, not just typing a new value into frontmatter.
+2. **Light touch.** One to three tags per essay. An essay that earns only one tag should carry only one. Multi-tagging should reflect substantive overlap, not topical convenience.
+3. **Provisional, not permanent.** The URL permanence rule applies to slugs, not tags. Tags may be merged, split, or renamed as the corpus reveals its shape. When a tag is renamed, update every essay that carries it in the same commit and update this section.
+4. **No hierarchy.** No parent/child tags, no nested categories, no sub-tags. Sparsity is a defining characteristic of the project.
+
+To extend the vocabulary, edit the `TAGS` constant in `src/content.config.ts` and update the list and definitions above in the same commit.
 
 ## Body formatting
 

@@ -3,6 +3,7 @@ title: "Hello World, Can We Talk?"
 description: "Companies do not get ten years anymore."
 status: published
 published: 2026-05-12
+tags: [governance, transformation]
 ---
 
 Companies do not get ten years anymore.

@@ -3,6 +3,7 @@ title: "Where You Come From Is Gone"
 description: "A line from Flannery O'Connor, a recursive conversation with two frontier AI models, and the question of how humans stay sovereign when complexity outpaces our unaided minds."
 status: published
 published: 2026-05-11
+tags: [identity]
 ---
 
 Flannery O'Connor, in *Wise Blood*: "Where you come from is gone, where you thought you were going to was never there, and where you are is no good unless you can get away from it."

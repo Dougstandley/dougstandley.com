@@ -173,8 +173,17 @@ article h1 {
   font-size: 32px;
   line-height: 1.2;
   letter-spacing: -0.015em;
-  margin-bottom: 36px;
+  margin-bottom: 18px;
   font-weight: 500;
+}
+
+article .essay-tags {
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 36px;
 }
 
 article p {
