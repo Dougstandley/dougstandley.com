@@ -24,12 +24,40 @@ const publishedReferences = referencedEntries.filter(
 );
 const forthcoming = essay.data.forthcoming ?? [];
 const showGraph = publishedReferences.length > 0 || forthcoming.length > 0;
+
+// Article JSON-LD. Author refs the Person node on /about by @id.
+const canonicalURL = new URL(`/essays/${essay.id}`, Astro.site).toString();
+const publishedISO = essay.data.published?.toISOString();
+const articleLd: Record<string, unknown> = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: essay.data.title,
+  mainEntityOfPage: canonicalURL,
+  url: canonicalURL,
+  author: {
+    '@type': 'Person',
+    '@id': 'https://dougstandley.com/about#person',
+    name: 'Doug Standley',
+    url: 'https://dougstandley.com/about',
+  },
+};
+if (essay.data.description) articleLd.description = essay.data.description;
+if (publishedISO) articleLd.datePublished = publishedISO;
+if (essay.data.tags && essay.data.tags.length > 0) {
+  articleLd.keywords = essay.data.tags.join(', ');
+}
 ---
 
 <BaseLayout
   title={`${essay.data.title} — Doug Standley`}
   description={essay.data.description}
+  ogType="article"
 >
+  <script
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(articleLd)}
+  />
   <article>
     <h1>{essay.data.title}</h1>
     {essay.data.tags && essay.data.tags.length > 0 && (

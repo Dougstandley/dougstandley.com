@@ -276,6 +276,45 @@ article hr::after {
   color: var(--muted);
 }
 
+/* ── About-page contact rail (Elsewhere) ────────────────────── */
+
+.about-elsewhere {
+  margin-top: 72px;
+  padding-top: 28px;
+  border-top: 1px solid var(--rule-soft);
+}
+
+.about-elsewhere .elsewhere-label {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 15px;
+  color: var(--muted);
+  margin: 0 0 6px;
+}
+
+.about-elsewhere ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.about-elsewhere li {
+  font-size: 17px;
+  line-height: 1.5;
+  margin-bottom: 2px;
+}
+
+.about-elsewhere a {
+  color: var(--fg);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.about-elsewhere a:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
 /* ── Footer ─────────────────────────────────────────────────── */
 
 footer {

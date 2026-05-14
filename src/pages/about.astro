@@ -1,11 +1,39 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Person JSON-LD. The stable @id lets Article author refs resolve to this node.
+// See PUBLISHING.md for the locked bio language.
+const personLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  '@id': 'https://dougstandley.com/about#person',
+  name: 'Doug Standley',
+  url: 'https://dougstandley.com/',
+  description:
+    'Designer-operator-builder who enters where emerging technology is becoming mandatory, but lacks the operating model to be adopted.',
+  sameAs: [
+    'https://dougstandley.substack.com',
+    'https://x.com/DougStandley',
+    'https://github.com/dougstandley',
+  ],
+};
+
+const elsewhere = [
+  { label: 'Substack', href: 'https://dougstandley.substack.com' },
+  { label: 'X', href: 'https://x.com/DougStandley' },
+  { label: 'GitHub', href: 'https://github.com/dougstandley' },
+];
 ---
 
 <BaseLayout
   title="About — Doug Standley"
   description="Doug Standley on transitions, agentic AI, and the gap between what technology can do and what institutions can absorb."
 >
+  <script
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(personLd)}
+  />
   <article>
     <h1>About</h1>
     <p>I work where emerging technology becomes operationally unavoidable before institutions know how to absorb it.</p>
@@ -14,5 +42,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <p>Today my work focuses on agentic AI, governance, trust, enterprise adoption, and the uncomfortable reality that most transformative technologies fail exactly where human accountability begins.</p>
     <p>I am less interested in predicting the future than in understanding what happens when the future arrives unevenly inside real organizations and real lives.</p>
     <p><em>No Lifeguard on Duty</em> is a working notebook about that terrain.</p>
+
+    <aside class="about-elsewhere">
+      <p class="elsewhere-label"><em>Elsewhere</em></p>
+      <ul>
+        {elsewhere.map((link) => (
+          <li><a href={link.href} rel="me">{link.label}</a></li>
+        ))}
+      </ul>
+    </aside>
   </article>
 </BaseLayout>
