@@ -1,12 +1,30 @@
 # Publishing Essays — dougstandley.com
 
-_Last updated: 2026-05-11_
+_Last updated: 2026-05-14_
 
 Reference for adding new essays to this site. Lives at the repo root so it travels with the project.
 
 ## File location
 
 Essays live at `src/content/essays/<slug>.md`. The slug becomes the URL — `<slug>.md` routes to `dougstandley.com/essays/<slug>`. Use lowercase, hyphens for spaces, no punctuation.
+
+## URL permanence
+
+_Rule established 2026-05-14 as part of v.1.0._
+
+Every published URL on this site is permanent. The address is part of the artifact.
+
+**The rule:**
+
+1. **Slugs never change.** Once an essay's `status` is `published`, the filename `<slug>.md` is locked. Renaming the file changes the URL, which breaks every external link, citation, and structured-data reference pointing at it. Do not rename for typo discovery, aesthetic preference, or perceived improvement.
+2. **If a slug must change** — reserved for genuine errors that survived publication — the old URL must continue to resolve via a permanent (`301`) redirect to the new URL. Redirects are forward-only and are never removed.
+3. **No URL reorganization for visual reasons.** Do not move essays into subdirectories, restructure the `/essays/` path, or change URL patterns for aesthetic preferences. Structural changes require migration plans with redirects, not silent rewrites.
+
+The rule applies equally to the homepage, About, archive, and tag pages. Any URL that has been advertised, linked, indexed, or cited is durable.
+
+**Why:** A site framed as a durable semantic object is, at the URL level, a set of stable addresses. Once structured data, canonical tags, RSS, and external citations reference those addresses — and as AI retrieval systems ingest the corpus — URL stability becomes part of intellectual durability. A broken link is a small erasure of authorship.
+
+**Redirect implementation (when needed):** Cloudflare Pages supports a `_redirects` file at the public root for Netlify-style redirects, and Cloudflare's Rules engine supports redirect rules at the proxy layer. When the first redirect is required, document the rule and the date in this section before applying it.
 
 ## Frontmatter schema
 
