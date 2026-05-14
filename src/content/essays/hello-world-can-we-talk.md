@@ -4,6 +4,9 @@ description: "Companies do not get ten years anymore."
 status: published
 published: 2026-05-12
 tags: [governance, transformation]
+references: [the-last-5-percent, no-lifeguard-on-duty]
+forthcoming:
+  - title: "Trust Syndicates"
 ---
 
 Companies do not get ten years anymore.
@@ -205,8 +208,6 @@ No single founder can underwrite every agent, every deployment, every enterprise
 The value chain may need to reorganize.
 
 One possibility worth naming: Trust Syndicates. Strange bedfellows under systemic pressure. Frontier labs, insurers, auditors, regulators, cloud providers, domain operators, verification firms, and accountable human governance — composed into consequence-bearing structures for healthcare, defense, financial services, sovereign infrastructure, and critical operations. Not another software reseller model. A structure designed to carry the weight that "AI error" reveals nobody currently carries.
-
-*(A fuller treatment of Trust Syndicates is coming in a forthcoming essay.)*
 
 ---
 

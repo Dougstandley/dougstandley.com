@@ -1,4 +1,4 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection, reference, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
 // Canonical tag vocabulary (v.1.0). Provisional — see PUBLISHING.md § Tags.
@@ -14,6 +14,14 @@ const essays = defineCollection({
     started: z.coerce.date().optional(),
     published: z.coerce.date().optional(),
     tags: z.array(z.enum(TAGS)).optional(),
+    // Structured pointers to other essays in the corpus. See PUBLISHING.md § References and forthcoming.
+    // `references` is validated at build time against existing essay slugs.
+    // `forthcoming` is free-form for essays not yet written.
+    references: z.array(reference('essays')).optional(),
+    forthcoming: z.array(z.object({
+      title: z.string(),
+      note: z.string().optional(),
+    })).optional(),
   }),
 });
 

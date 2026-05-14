@@ -225,6 +225,57 @@ article hr::after {
   letter-spacing: 0.5em;
 }
 
+/* ── Essay reference graph (Referenced / Forthcoming) ───────── */
+
+.essay-graph {
+  margin-top: 72px;
+  padding-top: 28px;
+  border-top: 1px solid var(--rule-soft);
+}
+
+.essay-graph .graph-section {
+  margin-bottom: 22px;
+}
+
+.essay-graph .graph-section:last-child {
+  margin-bottom: 0;
+}
+
+.essay-graph .graph-label {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 15px;
+  color: var(--muted);
+  margin: 0 0 6px;
+}
+
+.essay-graph ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.essay-graph li {
+  font-size: 17px;
+  line-height: 1.5;
+  margin-bottom: 2px;
+}
+
+.essay-graph a {
+  color: var(--fg);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.essay-graph a:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.essay-graph .graph-note {
+  color: var(--muted);
+}
+
 /* ── Footer ─────────────────────────────────────────────────── */
 
 footer {

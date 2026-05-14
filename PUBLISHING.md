@@ -49,6 +49,8 @@ Body in markdown starts here.
 | `published` | No (recommended) | date `YYYY-MM-DD` | Drives reverse-chronological sort on the homepage. Without it the essay sorts last. |
 | `started` | No | date `YYYY-MM-DD` | Personal tracking only. Not displayed. |
 | `tags` | No (recommended) | array of strings, vocabulary-constrained | One to three tags from the canonical vocabulary (see § Tags). Out-of-vocabulary values fail validation. |
+| `references` | No | array of essay slugs | Backward pointers to other essays in the corpus. Validated at build time — a typo fails the build. See § References and forthcoming. |
+| `forthcoming` | No | array of `{title, note?}` | Forward pointers to essays not yet written. See § References and forthcoming. |
 
 Fields like `date`, `pubDate`, `slug`, `categories`, `heroImage`, `author` are not in the schema and will fail validation. If you need a new field, extend `src/content.config.ts` first.
 
@@ -71,6 +73,38 @@ The canonical tag vocabulary contains four values:
 4. **No hierarchy.** No parent/child tags, no nested categories, no sub-tags. Sparsity is a defining characteristic of the project.
 
 To extend the vocabulary, edit the `TAGS` constant in `src/content.config.ts` and update the list and definitions above in the same commit.
+
+## References and forthcoming
+
+_Primitive established 2026-05-14 as part of v.1.0._
+
+Essays can point to other essays — backward (to existing published work) and forward (to work not yet written). Both are structured fields in frontmatter and render at the bottom of the essay as a small Referenced / Forthcoming block. This replaces ad-hoc inline parentheticals like "(forthcoming)" and turns the corpus into a small citation graph.
+
+**`references`** — backward pointers to existing essays.
+
+```yaml
+references: [the-last-5-percent, no-lifeguard-on-duty]
+```
+
+Values are essay slugs (filenames without `.md`). Slugs are validated at build time; a typo or reference to a nonexistent essay fails the build. References to essays that exist but are `status: draft` are silently filtered at render time — when the target publishes, the reference auto-activates without any other change.
+
+**`forthcoming`** — forward pointers to essays not yet written.
+
+```yaml
+forthcoming:
+  - title: "Trust Syndicates"
+  - title: "Another Essay Title"
+    note: "Optional one-sentence gesture at what's coming."
+```
+
+`title` is required and is what renders. `note` is optional and is a short editorial gesture, used sparingly. When the forthcoming essay is eventually published, remove the entry from this list and add the new slug to `references` in the same commit.
+
+**When to use each:**
+
+- The structured graph should mirror the substantive references the prose already makes — by-name references to other essays' arguments, deliberate title callbacks. Not every passing mention. The signal is editorial weight.
+- One-way only in v.1.0: a reference appears on the source essay's page; the target does not auto-display "referenced by." Backlinks may come in v.2.
+
+**Rendering:** the block appears below the essay body, after a hairline rule, with italic serif labels ("Referenced", "Forthcoming") and quiet links. Internal references link to the target essay's URL.
 
 ## Body formatting
 

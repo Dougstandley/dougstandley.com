@@ -1,5 +1,5 @@
 ---
-import { getCollection, render } from 'astro:content';
+import { getCollection, getEntry, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 export async function getStaticPaths() {
@@ -14,6 +14,16 @@ export async function getStaticPaths() {
 
 const { essay } = Astro.props;
 const { Content } = await render(essay);
+
+// Resolve references; filter to published targets only (drafts silently hidden).
+const referencedEntries = essay.data.references
+  ? await Promise.all(essay.data.references.map((ref) => getEntry(ref)))
+  : [];
+const publishedReferences = referencedEntries.filter(
+  (entry) => entry?.data.status === 'published'
+);
+const forthcoming = essay.data.forthcoming ?? [];
+const showGraph = publishedReferences.length > 0 || forthcoming.length > 0;
 ---
 
 <BaseLayout
@@ -28,5 +38,33 @@ const { Content } = await render(essay);
       </p>
     )}
     <Content />
+
+    {showGraph && (
+      <aside class="essay-graph">
+        {publishedReferences.length > 0 && (
+          <section class="graph-section">
+            <p class="graph-label"><em>Referenced</em></p>
+            <ul>
+              {publishedReferences.map((ref) => (
+                <li><a href={`/essays/${ref.id}`}>{ref.data.title}</a></li>
+              ))}
+            </ul>
+          </section>
+        )}
+        {forthcoming.length > 0 && (
+          <section class="graph-section">
+            <p class="graph-label"><em>Forthcoming</em></p>
+            <ul>
+              {forthcoming.map((item) => (
+                <li>
+                  {item.title}
+                  {item.note && <span class="graph-note"> — {item.note}</span>}
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+      </aside>
+    )}
   </article>
 </BaseLayout>
