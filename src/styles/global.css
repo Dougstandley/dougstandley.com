@@ -443,10 +443,22 @@ footer {
   padding: 22px 24px 0;
   border-top: 1px solid var(--rule-soft);
   color: var(--muted);
+}
+
+footer .footer-acknowledgment {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 14px;
+  line-height: 1.55;
+  margin: 0 0 18px;
+}
+
+footer .footer-copyright {
   font-family: var(--sans);
   font-size: 11px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+  margin: 0;
 }
 
 /* ── Accessibility ──────────────────────────────────────────── */
