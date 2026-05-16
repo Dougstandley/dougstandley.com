@@ -71,7 +71,7 @@ if (essay.data.tags && essay.data.tags.length > 0) {
       <aside class="essay-graph">
         {publishedReferences.length > 0 && (
           <section class="graph-section">
-            <p class="graph-label"><em>Referenced</em></p>
+            <h2 class="graph-label"><em>Referenced</em></h2>
             <ul>
               {publishedReferences.map((ref) => (
                 <li><a href={`/essays/${ref.id}`}>{ref.data.title}</a></li>
@@ -81,7 +81,7 @@ if (essay.data.tags && essay.data.tags.length > 0) {
         )}
         {forthcoming.length > 0 && (
           <section class="graph-section">
-            <p class="graph-label"><em>Forthcoming</em></p>
+            <h2 class="graph-label"><em>Forthcoming</em></h2>
             <ul>
               {forthcoming.map((item) => (
                 <li>

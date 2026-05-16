@@ -5,8 +5,11 @@
 :root {
   --bg: #faf8f0;
   --fg: #161616;
-  --muted: #8a857c;
-  --nav-muted: #6a6660;
+  /* --muted darkened from #8a857c to #6a6660 on 2026-05-16 to satisfy WCAG 2.1 AA
+     (4.5:1 minimum for normal text). Previous value computed to 3.45:1 against --bg;
+     the new value computes to 5.36:1. --nav-muted retired in the same commit since it
+     now points at the same color. */
+  --muted: #6a6660;
   --rule: rgba(22, 22, 22, 0.18);
   --rule-soft: rgba(22, 22, 22, 0.12);
   --accent: #234c7c;
@@ -71,12 +74,15 @@ header {
   font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--nav-muted);
+  color: var(--muted);
 }
 
 .nav a {
   color: inherit;
   text-decoration: none;
+  /* Tap-target enlargement (44×44px min). Negative margin keeps visual position unchanged. */
+  padding: 12px 4px;
+  margin: -12px -4px;
 }
 
 .nav a:hover {
@@ -354,8 +360,10 @@ article hr::after {
   font-family: var(--serif);
   font-style: italic;
   font-size: 15px;
+  font-weight: 400;
   color: var(--muted);
   margin: 0 0 6px;
+  letter-spacing: 0;
 }
 
 .essay-graph ul {
@@ -397,8 +405,10 @@ article hr::after {
   font-family: var(--serif);
   font-style: italic;
   font-size: 15px;
+  font-weight: 400;
   color: var(--muted);
   margin: 0 0 6px;
+  letter-spacing: 0;
 }
 
 .about-elsewhere ul {
@@ -439,6 +449,50 @@ footer {
   text-transform: uppercase;
 }
 
+/* ── Accessibility ──────────────────────────────────────────── */
+
+/* Skip-to-content link. Visually hidden until focused via Tab. */
+.skip-link {
+  position: absolute;
+  top: -48px;
+  left: 16px;
+  background: var(--bg);
+  color: var(--accent);
+  padding: 10px 18px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  border: 1px solid var(--accent);
+  z-index: 100;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
+/* Custom focus ring — visible only for keyboard users (:focus-visible). */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 1px;
+}
+
+/* Remove browser default h1 styling when .hero is rendered as <h1>. */
+h1.hero {
+  /* .hero rule above already sets font-size, font-weight, margin, line-height, color. */
+  /* This selector exists so the cascade is explicit. */
+}
+
+/* Bigger tap target for essay-list titles. Block-level link fills the row's left cell. */
+.essay-list .title {
+  display: block;
+  padding: 6px 0;
+  margin: -6px 0;
+}
+
 /* ── Mobile ─────────────────────────────────────────────────── */
 
 @media (max-width: 720px) {
@@ -452,7 +506,9 @@ footer {
   }
 
   .nav {
-    font-size: 10px;
+    /* Bumped from 10px to 11px on 2026-05-16 for legibility; lowercase letters are
+       small at 10px after 0.18em letter-spacing. */
+    font-size: 11px;
     gap: 20px;
   }
 
@@ -476,5 +532,113 @@ footer {
 
   article h1 {
     font-size: 26px;
+  }
+}
+
+/* ── Print ──────────────────────────────────────────────────── */
+
+@media print {
+  /* Reset to high-contrast print palette — toner-friendly. */
+  body {
+    background: #ffffff;
+    color: #000000;
+    font-size: 11pt;
+    line-height: 1.5;
+  }
+
+  /* Suppress non-content chrome. */
+  header,
+  footer,
+  .skip-link,
+  .essays-more,
+  .archive-back,
+  .about-elsewhere {
+    display: none !important;
+  }
+
+  /* Widened reading column for the printed page. */
+  main {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Minimal letterhead-style identification at the top of printed essays/about. */
+  article::before {
+    content: "Doug Standley · dougstandley.com";
+    display: block;
+    font-family: var(--sans);
+    font-size: 9pt;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #000000;
+    margin: 0 0 32px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #000000;
+  }
+
+  article h1 {
+    font-size: 22pt;
+    page-break-after: avoid;
+    color: #000000;
+  }
+
+  article h2,
+  article h3 {
+    page-break-after: avoid;
+    color: #000000;
+  }
+
+  article p,
+  article li {
+    font-size: 11pt;
+    line-height: 1.5;
+    color: #000000;
+    orphans: 3;
+    widows: 3;
+  }
+
+  article a {
+    color: #000000;
+    text-decoration: underline;
+  }
+
+  /* Annotate external links with URL after text for citation legibility. */
+  article a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    color: #555555;
+    font-style: italic;
+    word-break: break-all;
+  }
+
+  /* Don't annotate internal references — clutters reading flow. */
+  article a[href^="/"]::after,
+  article a[href^="#"]::after,
+  .essay-graph a::after {
+    content: none;
+  }
+
+  article hr {
+    page-break-after: avoid;
+  }
+
+  .essay-tags {
+    font-size: 9pt;
+    margin-bottom: 18px;
+    color: #000000;
+  }
+
+  .essay-graph {
+    page-break-inside: avoid;
+    margin-top: 36px;
+    border-top-color: #000000;
+  }
+
+  .essay-graph .graph-label,
+  .essay-graph a,
+  .essay-graph .graph-note {
+    color: #000000;
   }
 }

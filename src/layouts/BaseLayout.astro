@@ -51,17 +51,18 @@ const ogImageURL = new URL('/og-card.svg', Astro.site).toString();
   <slot name="head" />
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
   <header>
     <div class="topbar">
       <a href="/" class="wordmark">Doug&nbsp;&nbsp;Standley</a>
-      <nav class="nav">
+      <nav class="nav" aria-label="Primary">
         <a href="/essays">Essays</a>
         <a href="/about">About</a>
       </nav>
     </div>
     <div class="fullrule"></div>
   </header>
-  <main>
+  <main id="main">
     <slot />
   </main>
   <footer>

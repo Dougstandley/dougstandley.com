@@ -43,8 +43,8 @@ const elsewhere = [
     <p>I am less interested in predicting the future than in understanding what happens when the future arrives unevenly inside real organizations and real lives.</p>
     <p><em>No Lifeguard on Duty</em> is a working notebook about that terrain.</p>
 
-    <aside class="about-elsewhere">
-      <p class="elsewhere-label"><em>Elsewhere</em></p>
+    <aside class="about-elsewhere" aria-labelledby="elsewhere-heading">
+      <h2 id="elsewhere-heading" class="elsewhere-label"><em>Elsewhere</em></h2>
       <ul>
         {elsewhere.map((link) => (
           <li><a href={link.href} rel="me">{link.label}</a></li>

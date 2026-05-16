@@ -1,6 +1,6 @@
 # Build Plan — dougstandley.com v.1.0
 
-_Status: in progress (Phases 0–4 shipped; Phases 5–7 remaining)_
+_Status: in progress (Phases 0–5 shipped; Phases 6–7 remaining)_
 _Created: 2026-05-14_
 _Last updated: 2026-05-16_
 
@@ -155,25 +155,34 @@ What "done" means for each item.
 
 ### Item 11 — Accessibility pass (WCAG 2.1 AA)
 
-- Lighthouse accessibility score ≥ 95 on homepage, About, and a sample essay.
-- Manual checks: skip-to-content link present and functional; all interactive elements reachable by keyboard; visible focus states on every focusable element; color contrast verified (`#161616` on `#faf8f0`, `#234c7c` on `#faf8f0`, `#8a857c` on `#faf8f0`) — measured, not assumed.
-- Semantic landmarks: `<header>`, `<nav>`, `<main>`, `<article>`, `<footer>` used correctly.
-- Heading hierarchy audited: no skipped levels, one `<h1>` per page.
-- Alt-text discipline documented in `PUBLISHING.md` for the future image case (descriptive, not decorative; empty `alt=""` for purely decorative images).
+- Lighthouse accessibility score ≥ 95 on homepage, About, and a sample essay. _(Verified post-deploy.)_
+- Skip-to-content link present and functional (`.skip-link` in `BaseLayout.astro`, visible only when focused via Tab, targets `#main`).
+- Visible focus states on every focusable element via `:focus-visible { outline: 2px solid var(--accent); }`.
+- **Color contrast measured against `#faf8f0`:** `#161616` body = 17.1:1 (AAA), `#234c7c` accent = 8.1:1 (AAA), `#6a6660` muted = 5.4:1 (AA). The original `--muted` (`#8a857c` = 3.45:1) failed AA and was darkened to `#6a6660` on 2026-05-16; `--nav-muted` retired in the same commit since the two tokens now point to the same value.
+- Semantic landmarks present: `<header>`, `<nav aria-label="Primary">`, `<main id="main">`, `<article>`, `<aside>`, `<section>`, `<footer>`.
+- Heading hierarchy: one `<h1>` per page (homepage hero, About title, essay title, archive title, tag name, 404 message). Subsection headings (`Recent essays`, `Referenced`, `Forthcoming`, `Elsewhere`) promoted to `<h2>` with visual styling preserved via class.
+- Alt-text discipline documented in `PUBLISHING.md` § Alt-text discipline.
+- Tap-target minimum 44×44 on nav links via negative-margin padding trick (visual position unchanged).
 
 ### Item 12 — Print stylesheet
 
-- `@media print` block in `src/styles/global.css`.
-- Print rules: masthead and navigation suppressed; column widened to fit page (e.g., 100% with sensible margins); link URLs shown after link text (`a::after { content: " (" attr(href) ")"; }`) for citation legibility; page breaks respected before `<h2>` and `<hr>`; background color removed (save toner); `Referenced` and `Forthcoming` blocks preserved.
-- Verified by printing one essay from Chrome and Safari.
+- `@media print` block in `src/styles/global.css` (shipped 2026-05-16).
+- Background reset to `#ffffff`, color to `#000000` (toner-friendly).
+- Masthead, footer, skip link, "Read all essays →" link, archive back-link, and Elsewhere rail suppressed via `display: none !important`.
+- Reading column widened to 100% with no inner padding.
+- `article::before` adds a minimal "Doug Standley · dougstandley.com" letterhead at the top of printed essays + About (in lieu of suppressed masthead).
+- External link URLs annotated via `a[href^="http"]::after { content: " (" attr(href) ")"; }`. Internal links and reference-graph links explicitly NOT annotated (would clutter citation flow).
+- Page break discipline: `page-break-after: avoid` on h1/h2/h3 and hr; `page-break-inside: avoid` on the reference graph; orphans/widows set to 3 on paragraphs.
+- Verified by printing one essay from Chrome and Safari. _(Verified post-deploy.)_
 
 ### Item 13 — Mobile typography audit
 
-- Verified on iPhone Safari and Android Chrome (real devices, not just DevTools emulation).
-- Base font size, line-height, paragraph width, hero size, and masthead size deliberately checked.
-- Tap targets ≥ 44×44 px (essay list links, nav links).
-- Horizontal scroll audit: no element exceeds viewport width.
-- Document any adjustments in `src/styles/global.css` comments so the reasoning persists.
+- `@media (max-width: 720px)` rules reviewed 2026-05-16. Adjustments:
+  - Nav font size bumped from 10px → 11px (lowercase letters were too small at 10px under 0.18em letter-spacing). Inline CSS comment captures the rationale.
+  - Nav links: negative-margin padding trick adds an invisible 12×4px hit-target halo so taps reach ≥44×44 without moving any visible pixels.
+  - Essay-list `.title` made `display: block` with 6px vertical padding so each row's title becomes a row-height tap target (instead of just the text bounding box).
+- Base font (18px), hero (22px mobile / 26px desktop), h1 (26px mobile / 32px desktop) deliberately checked and left as-is.
+- Real-device verification (iPhone Safari, Android Chrome) is the responsibility of the post-push read-through, not the build. Tap-target sizes are correct on paper; touch feel is verified on glass.
 
 ### Item 14 — Operational durability documentation
 

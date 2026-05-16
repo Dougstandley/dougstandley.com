@@ -116,6 +116,21 @@ forthcoming:
 - **Do not** add an `# H1` at the top of the body. The page template renders the title from frontmatter; an additional H1 produces a duplicate.
 - Paragraphs separated by blank lines.
 
+## Alt-text discipline (for the future image case)
+
+_Rule established 2026-05-16 as part of v.1.0 — pre-commitment for when images return. See `BUILD_PLAN_V1.md` Appendix A._
+
+Images are editorial objects, not decoration. Every image carries either a descriptive `alt` attribute or an empty `alt=""` declared deliberately for purely decorative cases. There is no third option (no missing alt, no auto-generated alt, no filename-as-alt).
+
+**The rule:**
+
+1. **Descriptive alt for content-bearing images.** Describe what the image conveys editorially, not what it looks like. A diagram of decision flow gets alt text describing the decision the diagram is making, not "a diagram with boxes and arrows." A portrait gets alt text describing who the person is and the context, not "a man wearing glasses."
+2. **Empty alt for decorative images.** `alt=""` (the empty-string form, not a missing attribute) signals to screen readers that the image carries no editorial meaning and can be skipped. Use only when the image is genuinely ornamental — none of the eligible v.1.0 use cases qualify, so this should be rare.
+3. **Captions are editorial copy.** When a `<figcaption>` is present, it follows the same voice rules as body prose: declarative, precise, no apologetic hedging. Captions and alt text serve different purposes — alt text is for users who cannot see the image; captions are for everyone. Do not duplicate.
+4. **No "image of," "picture of," "photo of."** Screen readers already announce that the element is an image. Leading with "image of" is redundant.
+
+The discipline is enforced by review, not by build validation. Images return only when an essay's image carries thesis weight; the writer is responsible for getting the alt text right at that moment.
+
 ## Publishing workflow
 
 1. Write the essay file at `src/content/essays/<slug>.md` with the frontmatter and body.
