@@ -1,6 +1,6 @@
 # Build Plan — dougstandley.com v.1.0
 
-_Status: in progress (Phases 0–5 shipped; Phases 6–7 remaining)_
+_Status: in progress (Phases 0–6 shipped; Phase 7 remaining)_
 _Created: 2026-05-14_
 _Last updated: 2026-05-16_
 
