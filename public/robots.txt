@@ -1,4 +1,55 @@
+# dougstandley.com — bot policy v.1.0
+# Decision recorded 2026-05-16. Full reasoning in OPERATIONS.md § Bot policy.
+# Posture: allow all crawlers, including AI training crawlers.
+
 User-agent: *
+Allow: /
+
+# AI training crawlers — explicitly named to make the allow-decision visible.
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Cohere-AI
+Allow: /
+
+User-agent: Diffbot
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+# AI live-fetch agents — also explicitly allowed.
+User-agent: Claude-User
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Perplexity-User
 Allow: /
 
 Sitemap: https://dougstandley.com/sitemap-index.xml

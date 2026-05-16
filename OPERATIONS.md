@@ -79,12 +79,21 @@ The site is intentionally portable. Every component has a documented escape rout
 
 ## 7. Bot policy
 
-_Placeholder section. Decision pending in v.1.0 Phase 7 (item 10). When the decision lands, this section will document:_
+_Decision recorded 2026-05-16 as part of v.1.0 Phase 7 (item 10)._
 
-- _The reasoning for the chosen posture (which AI crawlers are allowed, which are blocked, and why)._
-- _The explicit `robots.txt` directives, including named entries for `GPTBot`, `ClaudeBot`, `Claude-User`, `CCBot`, `Google-Extended`, `PerplexityBot`, and others as applicable._
-- _The Cloudflare "Block AI bots" managed-rule decision (currently off; subject to revisit)._
-- _The framing principle: live-fetch agents (`Claude-User`, `ChatGPT-User`) remain readable since they are not training crawlers. Training crawlers are evaluated against the site's editorial purpose._
+**Posture: allow all crawlers, including AI training crawlers, with named directives in `robots.txt`.** Cloudflare "Block AI bots" managed rule remains **off**.
+
+**Reasoning.** The site argues, throughout its essays, that AI is becoming the cognitive layer of institutions — that the boundary conditions of consequential AI deployment are where institutional weight concentrates. A site framed that way is internally inconsistent if it refuses to be part of the corpus the cognitive layer reads. The bot policy should reflect what the writing argues for, not contradict it.
+
+The site is editorial; its function is durable retrievable presence on the public web. That function is served by being readable to humans directly (search crawlers), to humans through AI-assisted retrieval (live-fetch agents like `Claude-User` and `ChatGPT-User`), and to the AI systems whose corpora shape what those humans encounter (training crawlers like `GPTBot`, `ClaudeBot`, `Google-Extended`, `CCBot`, `PerplexityBot`, and others).
+
+Two facts informed the decision but did not drive it. First, `robots.txt` is a request, not a barrier; honest crawlers respect it, dishonest ones do not. Second, much of the public web has already been ingested by Common Crawl and data brokers; opting out at this point is partial at best. Neither fact would change the decision if both were false — the editorial argument is the load-bearing reason.
+
+**Explicit named directives.** `public/robots.txt` carries the canonical list. Every major AI crawler is named individually with `Allow: /`. The named entries are redundant against the `User-agent: *` rule but make the allow-decision visible — they signal that the site recognized these crawlers and chose not to block, rather than overlooked them. The list includes both training crawlers (`GPTBot`, `ClaudeBot`, `Google-Extended`, `CCBot`, `PerplexityBot`, `Bytespider`, `Applebot-Extended`, `Amazonbot`, `Cohere-AI`, `Diffbot`, `FacebookBot`, `Meta-ExternalAgent`) and live-fetch agents (`Claude-User`, `ChatGPT-User`, `Perplexity-User`).
+
+**Cloudflare managed rule.** Cloudflare's "Block AI bots" rule, available under Security → Bots, is **off**. The rule is a heavier instrument than `robots.txt` — it fingerprints bot behavior and rejects at the edge, regardless of `robots.txt` directives. Leaving it off is consistent with the chosen posture. If the posture ever changes, the Cloudflare rule and the `robots.txt` directives should change together; a mismatch (e.g., `robots.txt` says allow, Cloudflare says block) produces inconsistent observable behavior.
+
+**Reversibility.** The decision is recorded but not permanent. If the calculus changes — if training-data licensing markets mature, if a specific deployment uses the site's content in a way that warrants response, if the writing itself shifts to argue something different — the posture can be revised. The mechanics are straightforward: update `robots.txt`, update this section to document the change with a date, and (if blocking) flip the Cloudflare rule on. URL permanence applies to the essays' addresses; the bot policy is not under that constraint.
 
 ## 8. Known operational gaps
 

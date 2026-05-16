@@ -1,6 +1,6 @@
 # Build Plan — dougstandley.com v.1.0
 
-_Status: in progress (Phases 0–6 shipped; Phase 7 remaining)_
+_Status: **complete** — all 14 items + two architectural memos shipped between 2026-05-14 and 2026-05-16._
 _Created: 2026-05-14_
 _Last updated: 2026-05-16_
 
@@ -192,11 +192,11 @@ What "done" means for each item.
 
 ### Item 10 — Bot policy revisit and decision
 
-- A new section in `OPERATIONS.md` titled "Bot policy" stating the decision and the reasoning.
-- `robots.txt` updated to match the decision, with named directives for `GPTBot`, `ClaudeBot`, `Claude-User`, `CCBot`, `Google-Extended`, `PerplexityBot`, and others as applicable.
-- Cloudflare "Block AI bots" managed rule reviewed against the decision; per-vendor controls used where available.
-- Constraint: Claude-User and ChatGPT-User remain readable (live-fetch agents are not training crawlers).
-- Decision framed philosophically: the site argues about AI-mediated cognition; the bot stance must be coherent with that argument, neither reflexive blocking nor unrestricted ingestion.
+- **Decision recorded 2026-05-16.** Posture: allow all crawlers, including AI training crawlers. Full reasoning in `OPERATIONS.md` § 7 (Bot policy).
+- `public/robots.txt` updated with named `Allow` directives for major training crawlers (`GPTBot`, `ClaudeBot`, `Google-Extended`, `CCBot`, `PerplexityBot`, `Bytespider`, `Applebot-Extended`, `Amazonbot`, `Cohere-AI`, `Diffbot`, `FacebookBot`, `Meta-ExternalAgent`) and live-fetch agents (`Claude-User`, `ChatGPT-User`, `Perplexity-User`). Named entries are redundant against `User-agent: *` but make the allow-decision visible.
+- Cloudflare "Block AI bots" managed rule remains **off** — consistent with the `robots.txt` posture.
+- Framing: the site argues AI is becoming the cognitive layer of institutions; refusing to be part of the corpus that cognitive layer reads is internally inconsistent. Editorial coherence drove the decision, not enforceability or market analysis.
+- Reversible: if the posture ever changes, update `robots.txt` and `OPERATIONS.md` § 7 together with a dated note; flip the Cloudflare rule on if blocking.
 
 ## 5. Out of scope for v.1.0
 
