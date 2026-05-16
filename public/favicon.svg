@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <defs>
+    <style type="text/css"><![CDATA[
+      @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500&display=swap');
+      .mark {
+        font-family: 'Source Serif 4', Charter, Georgia, serif;
+        font-weight: 500;
+        font-size: 30px;
+        fill: #234c7c;
+      }
+    ]]></style>
+  </defs>
+  <text x="16" y="26" class="mark" text-anchor="middle">D</text>
+</svg>

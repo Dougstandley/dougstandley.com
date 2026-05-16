@@ -2,12 +2,16 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const essays = await getCollection('essays', ({ data }) => data.status === 'published');
-essays.sort((a, b) => {
+const all = await getCollection('essays', ({ data }) => data.status === 'published');
+all.sort((a, b) => {
   const da = a.data.published?.valueOf() ?? 0;
   const db = b.data.published?.valueOf() ?? 0;
   return db - da;
 });
+
+// Homepage shows recent essays only; full archive lives at /essays.
+const RECENT_COUNT = 5;
+const recent = all.slice(0, RECENT_COUNT);
 ---
 
 <BaseLayout title="Doug Standley">
@@ -15,17 +19,18 @@ essays.sort((a, b) => {
     Most AI fails at the point of human adoption. I work where emerging technology meets human reality<span class="accent"> — </span>inside institutions, where it breaks.
   </p>
 
-  {essays.length > 0 && (
+  {recent.length > 0 && (
     <section class="essays">
       <h2>Recent essays</h2>
       <ul class="essay-list">
-        {essays.map((essay) => (
+        {recent.map((essay) => (
           <li>
             <a class="title" href={`/essays/${essay.id}`}>{essay.data.title}</a>
             <span class="year">{essay.data.published?.getFullYear() ?? ''}</span>
           </li>
         ))}
       </ul>
+      <p class="essays-more"><a href="/essays">Read all essays →</a></p>
     </section>
   )}
 </BaseLayout>

@@ -1,8 +1,8 @@
 # Build Plan — dougstandley.com v.1.0
 
-_Status: in progress_
+_Status: in progress (Phases 0–4 shipped; Phases 5–7 remaining)_
 _Created: 2026-05-14_
-_Last updated: 2026-05-14_
+_Last updated: 2026-05-16_
 
 This document is the working artifact for the v.1.0 build. It defines the operating philosophy, the ship list with sequencing and dependencies, the acceptance criteria per item, and two written-down architectural decisions (image system, search) that are part of v.1.0 but not built in v.1.0.
 
@@ -126,9 +126,10 @@ What "done" means for each item.
 ### Item 2 — `/essays` archive route
 
 - New page at `src/pages/essays/index.astro` listing all published essays in reverse-chronological order, filterable by tag.
-- Tag filters as URL query parameters or distinct routes (`/essays/tag/<tag>`); the latter is preferable for canonical-URL hygiene.
-- Empty-state handling: if no essays match a tag filter, show a clean "no essays in this tag yet" message rather than a broken page.
-- Homepage continues to show recent essays only (current behavior); the archive is the place to browse everything.
+- Tag filters implemented as distinct routes (`/essays/tag/<tag>`), driven by the canonical `TAGS` vocabulary in `src/content.config.ts`. Per-tag URLs are durable, indexable, and link-shareable.
+- Empty-state handling: if no essays match a tag, show a clean "no essays in this tag yet" message rather than a broken page.
+- Homepage shows recent essays only — capped at the five most recent with a `Read all essays →` link to `/essays` below the list. Nav "Essays" routes to `/essays` (not `/`), so the archive is the canonical essays surface.
+- **Future treatment as corpus grows (decided 2026-05-14, not built):** when the archive page begins to feel long (rough trigger: ~30 essays), add year-grouped sub-headings within the single `/essays` page (2026, 2025, 2024…). The URL stays one — pagination is explicitly avoided because page numbers carry no editorial meaning. Year-groupings carry biographical meaning; tag pages carry topical meaning; both are durable. Search (item handled separately, see Appendix B) triggers at the same threshold.
 
 ### Item 7 — `sitemap.xml`, `robots.txt`, custom 404
 
@@ -139,15 +140,17 @@ What "done" means for each item.
 
 ### Item 8 — OG image template, Twitter cards, favicon
 
-- OG image strategy: build-time templated image per essay using `@vercel/og` or `satori`, rendering the essay title onto a brand-consistent background (cream `#faf8f0`, Source Serif 4, ink-blue accent).
-- `og:image`, `og:title`, `og:description`, `og:type`, `og:url` meta tags on every page (page-appropriate values).
-- Twitter card meta: `twitter:card` (`summary_large_image`), `twitter:title`, `twitter:description`, `twitter:image`, `twitter:creator` (pending Doug's handle decision).
-- Favicon: at minimum `favicon.ico` and `apple-touch-icon.png` in `public/`. Design: simple monogram or wordmark fragment consistent with the masthead. Not photographic.
+- **Revised scope (2026-05-14):** v.1.0 ships a single static OG card, not a per-essay templated build. Design locked in `public/og-card.svg` (1200×630, cream `#faf8f0`, Inter wordmark + Source Serif 4 subtitle echoing the Substack subtitle, ink-blue accent). Templated per-essay generation deferred to v.2.
+- **Known gap (2026-05-14):** PNG render path failed on Doug's local Mac (Chrome headless silently no-op; qlmanage clipped). SVG is committed and referenced via `og:image` / `twitter:image`. Mastodon and a few readers honor SVG; Twitter, LinkedIn, Meta, and most platforms fall back to a no-image preview card. Acceptable for v.1.0. PNG to be dropped into `public/og-card.png` via a one-line commit when a working render path appears; meta tags then swap from `.svg` to `.png` in the same commit.
+- `og:image`, `og:title`, `og:description`, `og:type`, `og:url`, `og:site_name` meta tags on every page (page-appropriate values), with `og:image:type` declared as `image/svg+xml`.
+- Twitter card meta: `twitter:card` (`summary_large_image`), `twitter:title`, `twitter:description`, `twitter:image`, `twitter:creator` set to `@DougStandley`, `twitter:site` set to `@DougStandley`.
+- Favicon: `public/favicon.svg` (single Source Serif 4 "D" glyph in ink-blue `#234c7c` on transparent). SVG favicon supported by all modern browsers; PNG fallback (`favicon-32.png`, `apple-touch-icon.png`) deferred — add when first user reports a rendering issue.
 
 ### Item 9 — RSS feed
 
-- `@astrojs/rss` integration installed; feed accessible at `/feed.xml` or `/rss.xml` (canonical choice: `/rss.xml`).
-- Feed includes all published essays in reverse-chronological order with full content (not truncated — the site is a reading surface, the feed should be too).
+- `@astrojs/rss` integration installed; feed accessible at `/rss.xml`.
+- Feed includes all published essays in reverse-chronological order.
+- **Revised scope (2026-05-14):** feed items carry **title + description + link + pubDate only — no full content**. Reasoning: the site is the canonical reading surface (with design, references, structured data); RSS at dougstandley.com is the citation/discovery feed, not the consumption surface. Substack carries the full-content-via-email path separately. Reversible later if reader feedback warrants.
 - `<link rel="alternate" type="application/rss+xml" href="/rss.xml"/>` in `<head>` so feed readers auto-discover.
 
 ### Item 11 — Accessibility pass (WCAG 2.1 AA)

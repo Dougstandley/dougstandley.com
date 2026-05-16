@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <style type="text/css"><![CDATA[
+      @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&family=Inter:wght@500&display=swap');
+      .wordmark {
+        font-family: 'Inter', -apple-system, 'Helvetica Neue', sans-serif;
+        font-weight: 500;
+        font-size: 24px;
+        letter-spacing: 5.28px;
+        fill: #161616;
+      }
+      .subtitle {
+        font-family: 'Source Serif 4', Charter, Georgia, serif;
+        font-weight: 400;
+        font-size: 64px;
+        letter-spacing: -0.012em;
+        fill: #161616;
+      }
+      .url {
+        font-family: 'Inter', -apple-system, 'Helvetica Neue', sans-serif;
+        font-weight: 500;
+        font-size: 16px;
+        letter-spacing: 0.96px;
+        fill: #8a857c;
+      }
+    ]]></style>
+  </defs>
+  <rect width="1200" height="630" fill="#faf8f0"/>
+  <text x="72" y="100" class="wordmark" xml:space="preserve">DOUG  STANDLEY</text>
+  <line x1="72" y1="124" x2="1128" y2="124" stroke="#161616" stroke-opacity="0.18" stroke-width="1"/>
+  <text x="72" y="310" class="subtitle">Essays on AI, institutions,</text>
+  <text x="72" y="390" class="subtitle">and the point of human adoption.</text>
+  <text x="1128" y="582" class="url" text-anchor="end">DOUGSTANDLEY.COM</text>
+</svg>

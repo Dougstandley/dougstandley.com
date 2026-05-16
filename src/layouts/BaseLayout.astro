@@ -12,6 +12,10 @@ const { title, description, ogType = 'website' } = Astro.props;
 // Canonical URL is the page's pathname resolved against the configured site origin.
 // `Astro.site` is set to 'https://dougstandley.com' in astro.config.mjs.
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
+
+// OG / Twitter share image. v.1.0 ships the SVG only; PNG generation deferred (see BUILD_PLAN_V1.md).
+// Platforms that honor SVG (Mastodon, some readers) will render it; others fall back to a no-image card.
+const ogImageURL = new URL('/og-card.svg', Astro.site).toString();
 ---
 
 <!DOCTYPE html>
@@ -23,10 +27,21 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
   <title>{title}</title>
   {description && <meta name="description" content={description} />}
   <link rel="canonical" href={canonicalURL} />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="alternate" type="application/rss+xml" title="Doug Standley" href="/rss.xml" />
   <meta property="og:title" content={title} />
   <meta property="og:type" content={ogType} />
   <meta property="og:url" content={canonicalURL} />
+  <meta property="og:site_name" content="Doug Standley" />
   {description && <meta property="og:description" content={description} />}
+  <meta property="og:image" content={ogImageURL} />
+  <meta property="og:image:type" content="image/svg+xml" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@DougStandley" />
+  <meta name="twitter:creator" content="@DougStandley" />
+  <meta name="twitter:title" content={title} />
+  {description && <meta name="twitter:description" content={description} />}
+  <meta name="twitter:image" content={ogImageURL} />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -40,7 +55,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
     <div class="topbar">
       <a href="/" class="wordmark">Doug&nbsp;&nbsp;Standley</a>
       <nav class="nav">
-        <a href="/">Essays</a>
+        <a href="/essays">Essays</a>
         <a href="/about">About</a>
       </nav>
     </div>

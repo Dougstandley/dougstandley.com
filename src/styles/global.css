@@ -167,6 +167,115 @@ main {
   font-variant-numeric: tabular-nums;
 }
 
+.essays-more {
+  margin-top: 22px;
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.essays-more a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.essays-more a:hover {
+  color: var(--accent);
+}
+
+/* ── Archive variant (/essays + /essays/tag/*) ──────────────── */
+
+.archive-eyebrow {
+  font-family: var(--sans);
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 500;
+  margin: 0 0 8px;
+}
+
+.archive-title {
+  font-size: 32px;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  font-weight: 500;
+  margin: 0 0 36px;
+}
+
+.essay-list--archive .meta {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 12px;
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.essay-list--archive .row-tags {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.essay-list--archive .row-tags a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.essay-list--archive .row-tags a:hover {
+  color: var(--accent);
+}
+
+.essay-list--archive .row-tags-sep {
+  color: var(--muted);
+}
+
+.archive-empty {
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--muted);
+  margin: 24px 0;
+}
+
+.archive-back {
+  margin-top: 48px;
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.archive-back a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.archive-back a:hover {
+  color: var(--accent);
+}
+
+/* ── 404 page ───────────────────────────────────────────────── */
+
+.not-found-recovery {
+  margin-top: 32px;
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.not-found-recovery a {
+  color: var(--fg);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.not-found-recovery a:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
 /* ── Article pages (essays, about) ──────────────────────────── */
 
 article h1 {

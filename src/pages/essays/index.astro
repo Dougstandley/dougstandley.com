@@ -1,0 +1,42 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const essays = await getCollection('essays', ({ data }) =>
+  import.meta.env.DEV || data.status === 'published'
+);
+essays.sort((a, b) => {
+  const da = a.data.published?.valueOf() ?? 0;
+  const db = b.data.published?.valueOf() ?? 0;
+  return db - da;
+});
+---
+
+<BaseLayout
+  title="Essays — Doug Standley"
+  description="The complete archive of essays at dougstandley.com."
+>
+  <section class="archive">
+    <h1 class="archive-title">Essays</h1>
+    <ul class="essay-list essay-list--archive">
+      {essays.map((essay) => (
+        <li>
+          <a class="title" href={`/essays/${essay.id}`}>{essay.data.title}</a>
+          <span class="meta">
+            {essay.data.tags && essay.data.tags.length > 0 && (
+              <span class="row-tags">
+                {essay.data.tags.map((tag, i) => (
+                  <>
+                    {i > 0 && <span class="row-tags-sep"> · </span>}
+                    <a href={`/essays/tag/${tag}`}>{tag}</a>
+                  </>
+                ))}
+              </span>
+            )}
+            <span class="year">{essay.data.published?.getFullYear() ?? ''}</span>
+          </span>
+        </li>
+      ))}
+    </ul>
+  </section>
+</BaseLayout>

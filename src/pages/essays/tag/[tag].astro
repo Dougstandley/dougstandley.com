@@ -1,0 +1,60 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { TAGS } from '../../../content.config.ts';
+
+export async function getStaticPaths() {
+  // One static route per tag in the canonical vocabulary.
+  // Out-of-vocabulary tags can't reach here because content.config.ts validates frontmatter.
+  return TAGS.map((tag) => ({ params: { tag } }));
+}
+
+const { tag } = Astro.params;
+
+const essays = await getCollection('essays', ({ data }) =>
+  (import.meta.env.DEV || data.status === 'published') &&
+  (data.tags?.includes(tag) ?? false)
+);
+essays.sort((a, b) => {
+  const da = a.data.published?.valueOf() ?? 0;
+  const db = b.data.published?.valueOf() ?? 0;
+  return db - da;
+});
+---
+
+<BaseLayout
+  title={`Essays tagged ${tag} — Doug Standley`}
+  description={`Essays at dougstandley.com tagged ${tag}.`}
+>
+  <section class="archive">
+    <p class="archive-eyebrow">Tagged</p>
+    <h1 class="archive-title">{tag}</h1>
+
+    {essays.length > 0 ? (
+      <ul class="essay-list essay-list--archive">
+        {essays.map((essay) => (
+          <li>
+            <a class="title" href={`/essays/${essay.id}`}>{essay.data.title}</a>
+            <span class="meta">
+              {essay.data.tags && essay.data.tags.length > 0 && (
+                <span class="row-tags">
+                  {essay.data.tags.map((t, i) => (
+                    <>
+                      {i > 0 && <span class="row-tags-sep"> · </span>}
+                      <a href={`/essays/tag/${t}`}>{t}</a>
+                    </>
+                  ))}
+                </span>
+              )}
+              <span class="year">{essay.data.published?.getFullYear() ?? ''}</span>
+            </span>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p class="archive-empty">No essays under this tag yet.</p>
+    )}
+
+    <p class="archive-back"><a href="/essays">← All essays</a></p>
+  </section>
+</BaseLayout>
