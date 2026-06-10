@@ -5,17 +5,20 @@ export interface Props {
   title: string;
   description?: string;
   ogType?: 'website' | 'article';
+  /** Path to a page-specific share card (e.g. /og/<slug>.png). Falls back to the site card. */
+  ogImage?: string;
 }
 
-const { title, description, ogType = 'website' } = Astro.props;
+const { title, description, ogType = 'website', ogImage } = Astro.props;
 
 // Canonical URL is the page's pathname resolved against the configured site origin.
 // `Astro.site` is set to 'https://dougstandley.com' in astro.config.mjs.
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
 
-// OG / Twitter share image. v.1.0 ships the SVG only; PNG generation deferred (see BUILD_PLAN_V1.md).
-// Platforms that honor SVG (Mastodon, some readers) will render it; others fall back to a no-image card.
-const ogImageURL = new URL('/og-card.svg', Astro.site).toString();
+// OG / Twitter share image. PNG (1200x630) — SVG share images are not rendered by
+// LinkedIn, X, Facebook, iMessage, Slack, or most platforms, so we ship a raster card.
+// Per-page cards (essays) pass `ogImage`; everything else uses the site card.
+const ogImageURL = new URL(ogImage ?? '/og-card.png', Astro.site).toString();
 ---
 
 <!DOCTYPE html>
@@ -35,7 +38,9 @@ const ogImageURL = new URL('/og-card.svg', Astro.site).toString();
   <meta property="og:site_name" content="Doug Standley" />
   {description && <meta property="og:description" content={description} />}
   <meta property="og:image" content={ogImageURL} />
-  <meta property="og:image:type" content="image/svg+xml" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@DougStandley" />
   <meta name="twitter:creator" content="@DougStandley" />

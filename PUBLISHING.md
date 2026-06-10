@@ -134,8 +134,9 @@ The discipline is enforced by review, not by build validation. Images return onl
 ## Publishing workflow
 
 1. Write the essay file at `src/content/essays/<slug>.md` with the frontmatter and body.
-2. (Recommended) Run `npm run build` locally to verify the build is clean. Not `npm run dev` — that's a local dev server, not a production build check.
-3. Commit and push from your Mac terminal:
+2. Generate the social share card: `npm run og:cards`. This writes/refreshes `public/og/<slug>.png` (1200×630), the image that appears when the essay is shared on LinkedIn, X, Substack, iMessage, etc. Run it whenever you add an essay or change a title or tags. The card design lives in `scripts/generate-og-cards.mjs`.
+3. (Recommended) Run `npm run build` locally to verify the build is clean. Not `npm run dev` — that's a local dev server, not a production build check.
+4. Commit and push from your Mac terminal:
 
    ```
    cd "/path/to/dougstandley.com"
@@ -144,7 +145,7 @@ The discipline is enforced by review, not by build validation. Images return onl
    git push
    ```
 
-4. Cloudflare Pages detects the push within seconds and rebuilds. Production deploy is live at `dougstandley.com` in about two minutes.
+5. Cloudflare Pages detects the push within seconds and rebuilds. Production deploy is live at `dougstandley.com` in about two minutes.
 
 ## Authentication
 

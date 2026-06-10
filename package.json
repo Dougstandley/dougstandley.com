@@ -8,11 +8,19 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "og:cards": "node scripts/generate-og-cards.mjs"
   },
   "dependencies": {
     "astro": "^5.0.0",
     "@astrojs/sitemap": "^3.2.0",
     "@astrojs/rss": "^4.0.0"
+  },
+  "devDependencies": {
+    "@fontsource/inter": "^5.2.8",
+    "@fontsource/source-serif-4": "^5.2.9",
+    "@resvg/resvg-js": "^2.6.2",
+    "gray-matter": "^4.0.3",
+    "satori": "^0.26.0"
   }
 }
