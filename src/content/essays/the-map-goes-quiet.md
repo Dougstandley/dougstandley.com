@@ -1,6 +1,6 @@
 ---
 title: "The Map Goes Quiet"
-description: "We're accelerating because we're lost without a map and won't admit it."
+description: "In Paris I could orient without a map. AI is the moment the map goes quiet — when navigation fails and judgment is all that's left."
 status: published
 published: 2026-05-30
 ---

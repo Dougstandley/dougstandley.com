@@ -1,6 +1,6 @@
 ---
 title: "Hello World, Can We Talk?"
-description: "Companies do not get ten years anymore."
+description: "For thirty years, enterprise technology lived in a forgiving world. AI ends it — by amplifying the visibility of institutional incompetence."
 status: published
 published: 2026-05-12
 tags: [governance, transformation]

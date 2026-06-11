@@ -1,6 +1,6 @@
 ---
 title: "The Second Stanford"
-description: "She had reduced me to a category. I had immediately done the same thing to her."
+description: "She reduced me to a category, and I did the same to her. On two Stanfords — one that seeks the extraordinary early, one that quietly asks who is still becoming."
 status: published
 published: 2026-06-04
 tags: [identity, transformation]

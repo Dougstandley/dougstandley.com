@@ -1,6 +1,6 @@
 ---
 title: "The Interruption"
-description: "The virus arrived in a man who was already losing something."
+description: "A Google deal collapses in silence, then the body does too: pulmonary embolisms, no diagnosis, and the will to understand what entered the body and the culture."
 status: published
 published: 2026-05-13
 tags: [identity, transformation]
