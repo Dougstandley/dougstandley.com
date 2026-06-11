@@ -68,12 +68,12 @@ const title = (slug: string) => byId.get(slug)?.data.title ?? slug;
 >
   <section class="map-page">
     <h1 class="map-title">Map of the Work</h1>
-    <p class="map-intro">
-      Most writing is organized by chronology. This work is organized by terrain.
-      Nearly every essay here is about the same thing — finding your bearings after a
-      map stops working: institutional, cognitive, or personal. This is a map of those
-      maps. Lines mark essays in conversation; the center holds the one that names the project.
-    </p>
+    <div class="map-intro">
+      <p>Most writing is organized by chronology. This work is organized by terrain.</p>
+      <p>Nearly every essay here begins with the same disruption: a map that no longer explains the world. Sometimes the failure is institutional. Sometimes cognitive. Sometimes deeply personal.</p>
+      <p>What follows is the work of reorientation.</p>
+      <p>This map traces those paths. Lines connect essays that cite or echo one another. At the center is the essay that gave the project its name.</p>
+    </div>
 
     <figure class="map-figure">
       <svg viewBox="0 0 840 600" role="img"
@@ -113,6 +113,7 @@ const title = (slug: string) => byId.get(slug)?.data.title ?? slug;
       </svg>
 
       <figcaption class="map-key">
+        <span class="key-hint">Select any essay to read it</span>
         <span class="key-item"><svg class="key-line" width="26" height="6" aria-hidden="true"><line x1="0" y1="3" x2="26" y2="3" class="edge edge--ref" /></svg> cites</span>
         <span class="key-item"><svg class="key-line" width="26" height="6" aria-hidden="true"><line x1="0" y1="3" x2="26" y2="3" class="edge edge--related" /></svg> in conversation</span>
       </figcaption>
@@ -154,12 +155,15 @@ const title = (slug: string) => byId.get(slug)?.data.title ?? slug;
     margin-bottom: 16px;
   }
   .map-intro {
-    font-size: 17px;
-    line-height: 1.55;
-    color: var(--muted);
     max-width: 620px;
     margin-bottom: 28px;
   }
+  .map-intro p {
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--muted);
+  }
+  .map-intro p + p { margin-top: 14px; }
 
   .map-figure { margin: 0 0 8px; }
   .map-figure svg { width: 100%; height: auto; display: block; }
@@ -207,18 +211,26 @@ const title = (slug: string) => byId.get(slug)?.data.title ?? slug;
   .node-link { cursor: pointer; }
   .node-link:hover .node, .node-link:focus-visible .node { fill: #16335a; }
   .node-link:hover .node--legend, .node-link:focus-visible .node--legend { fill: var(--accent); }
-  .node-link:hover .node-label, .node-link:focus-visible .node-label { fill: var(--accent); }
+  .node-link:hover .node-label, .node-link:focus-visible .node-label { fill: var(--accent); text-decoration: underline; }
   .node-link:focus-visible { outline: none; }
-  .node-link:focus-visible .node-label { text-decoration: underline; }
 
   .map-key {
     display: flex;
+    align-items: center;
     gap: 24px;
     font-family: var(--sans);
     font-size: 12px;
     letter-spacing: 0.04em;
     color: var(--muted);
     margin-top: 4px;
+  }
+  .key-hint {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 14px;
+    letter-spacing: 0;
+    color: var(--muted);
+    margin-right: auto;
   }
   .key-item { display: inline-flex; align-items: center; gap: 8px; }
   .key-line { overflow: visible; }
