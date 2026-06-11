@@ -72,7 +72,7 @@ const title = (slug: string) => byId.get(slug)?.data.title ?? slug;
       <p>Most writing is organized by chronology. This work is organized by terrain.</p>
       <p>Nearly every essay here begins with the same disruption: a map that no longer explains the world. Sometimes the failure is institutional. Sometimes cognitive. Sometimes deeply personal.</p>
       <p>What follows is the work of reorientation.</p>
-      <p>This map traces those paths. Lines connect essays that cite or echo one another. At the center is the essay that gave the project its name.</p>
+      <p>This map traces those paths. Lines connect essays that cite or echo one another. At the center is the essay that gave the project its name. Select any essay to read it.</p>
     </div>
 
     <figure class="map-figure">
@@ -113,7 +113,6 @@ const title = (slug: string) => byId.get(slug)?.data.title ?? slug;
       </svg>
 
       <figcaption class="map-key">
-        <span class="key-hint">Select any essay to read it</span>
         <span class="key-item"><svg class="key-line" width="26" height="6" aria-hidden="true"><line x1="0" y1="3" x2="26" y2="3" class="edge edge--ref" /></svg> cites</span>
         <span class="key-item"><svg class="key-line" width="26" height="6" aria-hidden="true"><line x1="0" y1="3" x2="26" y2="3" class="edge edge--related" /></svg> in conversation</span>
       </figcaption>
@@ -223,14 +222,6 @@ const title = (slug: string) => byId.get(slug)?.data.title ?? slug;
     letter-spacing: 0.04em;
     color: var(--muted);
     margin-top: 4px;
-  }
-  .key-hint {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 14px;
-    letter-spacing: 0;
-    color: var(--muted);
-    margin-right: auto;
   }
   .key-item { display: inline-flex; align-items: center; gap: 8px; }
   .key-line { overflow: visible; }
