@@ -4,6 +4,7 @@ description: "She reduced me to a category, and I did the same to her. On two St
 status: published
 published: 2026-06-04
 tags: [identity, transformation]
+related: [the-map-goes-quiet, trying-to-keep-time]
 ---
 
 One Stanford searches for extraordinary people early. The other quietly asks who is still becoming.

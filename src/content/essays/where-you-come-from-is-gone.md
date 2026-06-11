@@ -4,6 +4,7 @@ description: "A line from Flannery O'Connor, a recursive conversation with two f
 status: published
 published: 2026-05-11
 tags: [identity]
+related: [the-map-goes-quiet, no-lifeguard-on-duty, the-interruption]
 ---
 
 Flannery O'Connor, in *Wise Blood*: "Where you come from is gone, where you thought you were going to was never there, and where you are is no good unless you can get away from it."

@@ -4,6 +4,7 @@ description: "A Google deal collapses in silence, then the body does too: pulmon
 status: published
 published: 2026-05-13
 tags: [identity, transformation]
+related: [where-you-come-from-is-gone, trying-to-keep-time]
 ---
 In August 2019, Google walked.
 

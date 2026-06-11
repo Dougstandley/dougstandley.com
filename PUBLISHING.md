@@ -99,8 +99,17 @@ forthcoming:
 
 `title` is required and is what renders. `note` is optional and is a short editorial gesture, used sparingly. When the forthcoming essay is eventually published, remove the entry from this list and add the new slug to `references` in the same commit.
 
+**`related`** — lateral pointers to kindred essays (added 2026-06-10, v.2.0).
+
+```yaml
+related: [the-map-goes-quiet, no-lifeguard-on-duty]
+```
+
+Same slug validation as `references`. The distinction is semantic: `references` means *this essay cites or invokes that one*; `related` means *these essays are in conversation*, no citation implied. `related` is the data the **Map of the Work** (`/map`) draws as dashed lines; genuine `references` render there as solid lines. Encode `related` on both essays in a pair — it is not auto-mirrored. Currently `related` feeds only the Map; it does not yet render on the essay page itself (an easy future addition). Placing an essay *on the map terrain* also requires a hand-authored position in `src/pages/map.astro` (`NODES` + `GROUPS`); until added there, a new essay still appears in the archive and its Referenced/Forthcoming block, just not on the map.
+
 **When to use each:**
 
+- `references` = genuine citation (solid lines on the map); `related` = thematic kinship (dashed lines). Keep `references` honest — don't inflate them with loose associations, which is exactly what `related` is for.
 - The structured graph should mirror the substantive references the prose already makes — by-name references to other essays' arguments, deliberate title callbacks. Not every passing mention. The signal is editorial weight.
 - One-way only in v.1.0: a reference appears on the source essay's page; the target does not auto-display "referenced by." Backlinks may come in v.2.
 

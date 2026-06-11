@@ -3,6 +3,8 @@ title: "The Map Goes Quiet"
 description: "In Paris I could orient without a map. AI is the moment the map goes quiet — when navigation fails and judgment is all that's left."
 status: published
 published: 2026-05-30
+tags: [transformation, identity]
+related: [where-you-come-from-is-gone, the-second-stanford, no-lifeguard-on-duty]
 ---
 
 My wife Carrie has an uncanny sense of direction.

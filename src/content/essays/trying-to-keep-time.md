@@ -4,6 +4,7 @@ description: "Music as foundation, performance as identity, and a daughter who k
 status: published
 published: 2026-05-18
 tags: [identity]
+related: [the-interruption, the-second-stanford]
 ---
 
 There are moments when you realize something was never background noise.

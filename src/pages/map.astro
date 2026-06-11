@@ -1,0 +1,253 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const essays = await getCollection('essays', ({ data }) =>
+  import.meta.env.DEV || data.status === 'published'
+);
+const byId = new Map(essays.map((e) => [e.id, e]));
+
+// ── Authored terrain ────────────────────────────────────────────
+// Positions are hand-placed in a 0..840 × 0..600 viewBox. This is an
+// authored map, not an auto-layout — placement carries meaning. New
+// essays need a NODE entry (and a GROUPS slug) to appear on the map;
+// until then they still surface in the archive and on essay pages.
+const TERRITORIES = [
+  { label: 'COGNITIVE / TECHNOLOGICAL', cx: 205, cy: 300, rx: 152, ry: 150, lx: 205, ly: 138 },
+  { label: 'INSTITUTIONAL', cx: 630, cy: 205, rx: 168, ry: 120, lx: 648, ly: 96 },
+  { label: 'PERSONAL', cx: 480, cy: 472, rx: 228, ry: 112, lx: 628, ly: 556 },
+];
+
+const NODES: Record<string, { x: number; y: number; dy: number; legend?: boolean }> = {
+  'where-you-come-from-is-gone': { x: 168, y: 258, dy: -16 },
+  'the-map-goes-quiet':          { x: 262, y: 352, dy: 28 },
+  'the-last-5-percent':          { x: 575, y: 162, dy: -16 },
+  'hello-world-can-we-talk':     { x: 676, y: 242, dy: 28 },
+  'the-interruption':            { x: 388, y: 484, dy: 28 },
+  'the-second-stanford':         { x: 562, y: 446, dy: -16 },
+  'trying-to-keep-time':         { x: 452, y: 530, dy: 28 },
+  'no-lifeguard-on-duty':        { x: 405, y: 322, dy: -18, legend: true },
+};
+
+// ── Edges from the data ─────────────────────────────────────────
+// Undirected; references render solid (genuine citations), related dashed
+// (lateral kinship). A pair that is both upgrades to solid.
+type Edge = { key: string; a: string; b: string; kind: 'ref' | 'related' };
+const edgeMap = new Map<string, Edge>();
+for (const e of essays) {
+  const add = (dst: string, kind: 'ref' | 'related') => {
+    if (!NODES[e.id] || !NODES[dst]) return;
+    const key = [e.id, dst].sort().join('|');
+    const existing = edgeMap.get(key);
+    if (existing) {
+      if (kind === 'ref') existing.kind = 'ref';
+      return;
+    }
+    edgeMap.set(key, { key, a: e.id, b: dst, kind });
+  };
+  for (const r of e.data.references ?? []) add((r as { id: string }).id, 'ref');
+  for (const r of e.data.related ?? []) add((r as { id: string }).id, 'related');
+}
+const edges = [...edgeMap.values()];
+
+// ── Accessible terrain list (also the SEO + mobile fallback) ────
+const GROUPS = [
+  { label: 'Institutional', gloss: 'where organizations lose the map', slugs: ['the-last-5-percent', 'hello-world-can-we-talk'] },
+  { label: 'Cognitive / Technological', gloss: 'where mind and machine blur and the old map fails', slugs: ['where-you-come-from-is-gone', 'the-map-goes-quiet'] },
+  { label: 'Personal', gloss: 'where identity navigates rupture', slugs: ['the-interruption', 'the-second-stanford', 'trying-to-keep-time'] },
+  { label: 'The legend', gloss: 'the working notebook that names the project', slugs: ['no-lifeguard-on-duty'] },
+];
+
+const node = (slug: string) => NODES[slug];
+const title = (slug: string) => byId.get(slug)?.data.title ?? slug;
+---
+
+<BaseLayout
+  title="Map of the Work — Doug Standley"
+  description="A conceptual map of the essays at dougstandley.com — three territories of failed maps (institutional, cognitive, personal) and the connections between them."
+>
+  <section class="map-page">
+    <h1 class="map-title">Map of the Work</h1>
+    <p class="map-intro">
+      Most writing is organized by chronology. This work is organized by terrain.
+      Nearly every essay here is about the same thing — finding your bearings after a
+      map stops working: institutional, cognitive, or personal. This is a map of those
+      maps. Lines mark essays in conversation; the center holds the one that names the project.
+    </p>
+
+    <figure class="map-figure">
+      <svg viewBox="0 0 840 600" role="img"
+           aria-label="Conceptual map of essays grouped into three territories — institutional, cognitive/technological, and personal — connected by citation and kinship lines, with No Lifeguard on Duty at the center.">
+        <!-- territories -->
+        {TERRITORIES.map((t) => (
+          <g class="zone">
+            <ellipse cx={t.cx} cy={t.cy} rx={t.rx} ry={t.ry} class="zone-fill" />
+            <ellipse cx={t.cx} cy={t.cy} rx={t.rx} ry={t.ry} class="zone-stroke" />
+            <text x={t.lx} y={t.ly} text-anchor="middle" class="zone-label">{t.label}</text>
+          </g>
+        ))}
+
+        <!-- edges -->
+        {edges.map((e) => (
+          <line
+            x1={node(e.a).x} y1={node(e.a).y}
+            x2={node(e.b).x} y2={node(e.b).y}
+            class={e.kind === 'ref' ? 'edge edge--ref' : 'edge edge--related'}
+          />
+        ))}
+
+        <!-- nodes -->
+        {Object.entries(NODES).map(([slug, n]) => (
+          byId.has(slug) && (
+            <a href={`/essays/${slug}`} aria-label={title(slug)} class={n.legend ? 'node-link node-link--legend' : 'node-link'}>
+              <circle cx={n.x} cy={n.y} r={n.legend ? 11 : 6} class={n.legend ? 'node node--legend' : 'node'} />
+              <text x={n.x} y={n.y + n.dy} text-anchor="middle" class={n.legend ? 'node-label node-label--legend' : 'node-label'}>
+                {title(slug)}
+              </text>
+              {n.legend && (
+                <text x={n.x} y={n.y + 24} text-anchor="middle" class="legend-tag">THE LEGEND</text>
+              )}
+            </a>
+          )
+        ))}
+      </svg>
+
+      <figcaption class="map-key">
+        <span class="key-item"><svg class="key-line" width="26" height="6" aria-hidden="true"><line x1="0" y1="3" x2="26" y2="3" class="edge edge--ref" /></svg> cites</span>
+        <span class="key-item"><svg class="key-line" width="26" height="6" aria-hidden="true"><line x1="0" y1="3" x2="26" y2="3" class="edge edge--related" /></svg> in conversation</span>
+      </figcaption>
+    </figure>
+
+    <!-- Accessible / mobile / SEO terrain list -->
+    <nav class="map-terrain" aria-label="Essays by territory">
+      {GROUPS.map((g) => (
+        <section class="terrain-group">
+          <h2 class="terrain-label">{g.label} <span class="terrain-gloss">— {g.gloss}</span></h2>
+          <ul>
+            {g.slugs.filter((s) => byId.has(s)).map((s) => (
+              <li>
+                <a href={`/essays/${s}`}>{title(s)}</a>
+                {byId.get(s)?.data.description && (
+                  <span class="terrain-desc">{byId.get(s)!.data.description}</span>
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+    </nav>
+  </section>
+</BaseLayout>
+
+<style is:global>
+  /* The map breaks out of the 620px text column on wide screens. */
+  main:has(.map-page) { width: 880px; max-width: calc(100% - 48px); }
+</style>
+
+<style>
+  .map-page { margin-top: 8px; }
+  .map-title {
+    font-size: 32px;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+  .map-intro {
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--muted);
+    max-width: 620px;
+    margin-bottom: 28px;
+  }
+
+  .map-figure { margin: 0 0 8px; }
+  .map-figure svg { width: 100%; height: auto; display: block; }
+
+  .zone-fill { fill: var(--fg); opacity: 0.035; }
+  .zone-stroke { fill: none; stroke: var(--muted); stroke-opacity: 0.3; stroke-dasharray: 3 6; }
+  .zone-label {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    font-weight: 600;
+    fill: var(--muted);
+    opacity: 0.85;
+  }
+
+  .edge { stroke-linecap: round; }
+  .edge--ref { stroke: var(--accent); stroke-width: 1.6; stroke-opacity: 0.5; }
+  .edge--related { stroke: var(--muted); stroke-width: 1.3; stroke-opacity: 0.42; stroke-dasharray: 2 5; }
+
+  .node { fill: var(--accent); transition: fill 0.15s ease; }
+  .node--legend { fill: var(--bg); stroke: var(--accent); stroke-width: 2.5; transition: fill 0.15s ease; }
+  .node-label {
+    font-family: var(--serif);
+    font-size: 15px;
+    fill: var(--fg);
+    paint-order: stroke;
+    stroke: var(--bg);
+    stroke-width: 4px;
+    stroke-linejoin: round;
+    transition: fill 0.15s ease;
+  }
+  .node-label--legend { font-weight: 600; }
+  .legend-tag {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    font-weight: 600;
+    fill: var(--accent);
+    paint-order: stroke;
+    stroke: var(--bg);
+    stroke-width: 4px;
+    stroke-linejoin: round;
+  }
+
+  .node-link { cursor: pointer; }
+  .node-link:hover .node, .node-link:focus-visible .node { fill: #16335a; }
+  .node-link:hover .node--legend, .node-link:focus-visible .node--legend { fill: var(--accent); }
+  .node-link:hover .node-label, .node-link:focus-visible .node-label { fill: var(--accent); }
+  .node-link:focus-visible { outline: none; }
+  .node-link:focus-visible .node-label { text-decoration: underline; }
+
+  .map-key {
+    display: flex;
+    gap: 24px;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  .key-item { display: inline-flex; align-items: center; gap: 8px; }
+  .key-line { overflow: visible; }
+
+  /* Terrain list — the accessible / mobile / SEO version */
+  .map-terrain { margin-top: 48px; border-top: 1px solid var(--rule-soft); padding-top: 8px; }
+  .terrain-group { margin-top: 32px; }
+  .terrain-label {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-bottom: 14px;
+  }
+  .terrain-gloss { font-weight: 400; color: var(--muted); font-style: italic; }
+  .terrain-group ul { list-style: none; }
+  .terrain-group li { margin-bottom: 16px; line-height: 1.4; }
+  .terrain-group li a {
+    font-size: 17px;
+    color: var(--fg);
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule);
+  }
+  .terrain-group li a:hover { color: var(--accent); border-color: var(--accent); }
+  .terrain-desc { display: block; font-size: 14.5px; color: var(--muted); margin-top: 4px; }
+
+  @media (max-width: 560px) {
+    .zone-label { font-size: 16px; }
+    .node-label { font-size: 18px; }
+    .legend-tag { font-size: 13px; }
+  }
+</style>

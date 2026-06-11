@@ -4,6 +4,7 @@ description: "The last 5% of AI deployment is where value, risk, and accountabil
 status: published
 published: 2026-05-11
 tags: [agentic-ux, governance]
+related: [no-lifeguard-on-duty]
 ---
 
 Where institutions reveal themselves — and AI systems fail.

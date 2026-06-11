@@ -18,6 +18,9 @@ const essays = defineCollection({
     // `references` is validated at build time against existing essay slugs.
     // `forthcoming` is free-form for essays not yet written.
     references: z.array(reference('essays')).optional(),
+    // `related` — lateral kinship: essays in conversation with this one, no citation implied.
+    // Validated at build time against existing essay slugs. Feeds the Map of the Work (/map).
+    related: z.array(reference('essays')).optional(),
     forthcoming: z.array(z.object({
       title: z.string(),
       note: z.string().optional(),
