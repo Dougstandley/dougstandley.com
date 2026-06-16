@@ -502,6 +502,7 @@ article hr::after {
   color: var(--accent);
   text-decoration: none;
   border-bottom: 1px solid var(--rule-soft);
+  white-space: nowrap;
 }
 
 .author-chip .author-bio a:hover {
