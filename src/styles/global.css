@@ -464,16 +464,20 @@ article hr::after {
 /* ── Essay author chip (foot of each essay) ─────────────────── */
 
 .author-chip {
-  display: flex;
-  gap: 15px;
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  grid-template-areas:
+    "avatar name"
+    "avatar bio";
+  column-gap: 15px;
   align-items: center;
   margin-top: 72px;
   padding-top: 28px;
   border-top: 1px solid var(--rule-soft);
 }
 
-.author-chip img {
-  flex: 0 0 56px;
+.author-chip .author-avatar {
+  grid-area: avatar;
   width: 56px;
   height: 56px;
   border-radius: 50%;
@@ -481,21 +485,22 @@ article hr::after {
   background: #000;
 }
 
+.author-chip .author-name {
+  grid-area: name;
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--fg);
+  margin: 0 0 2px;
+}
+
 .author-chip .author-bio {
+  grid-area: bio;
   font-family: var(--sans);
   font-size: 14px;
   line-height: 1.5;
   color: var(--muted);
   margin: 0;
-}
-
-.author-chip .author-bio strong {
-  display: block;
-  font-family: var(--serif);
-  font-size: 17px;
-  font-weight: 600;
-  color: var(--fg);
-  margin-bottom: 2px;
 }
 
 .author-chip .author-bio a {
@@ -507,6 +512,17 @@ article hr::after {
 
 .author-chip .author-bio a:hover {
   border-bottom-color: var(--accent);
+}
+
+/* Mobile: avatar + name on the top row, bio full-width below */
+@media (max-width: 560px) {
+  .author-chip {
+    grid-template-areas:
+      "avatar name"
+      "bio bio";
+    column-gap: 14px;
+    row-gap: 8px;
+  }
 }
 
 /* ── Footer ─────────────────────────────────────────────────── */
