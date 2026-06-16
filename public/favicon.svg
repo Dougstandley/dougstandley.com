@@ -1,14 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
-  <defs>
-    <style type="text/css"><![CDATA[
-      @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500&display=swap');
-      .mark {
-        font-family: 'Source Serif 4', Charter, Georgia, serif;
-        font-weight: 500;
-        font-size: 30px;
-        fill: #234c7c;
-      }
-    ]]></style>
-  </defs>
-  <text x="16" y="26" class="mark" text-anchor="middle">D</text>
+  <!-- Face-derived mark on a self-contained ink-blue ground (survives dark tabs) -->
+  <rect x="0" y="0" width="32" height="32" rx="7" fill="#234c7c"/>
+  <g fill="none" stroke="#faf8f0" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+    <rect x="4" y="12" width="9.5" height="8" rx="1.8"/>
+    <rect x="18.5" y="12" width="9.5" height="8" rx="1.8"/>
+    <path d="M13.5 14.5 H18.5"/>
+  </g>
 </svg>

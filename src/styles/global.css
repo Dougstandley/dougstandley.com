@@ -434,6 +434,80 @@ article hr::after {
   border-bottom-color: var(--accent);
 }
 
+/* ── About-page portrait (dark card, floated beside bio) ─────── */
+
+.portrait-card {
+  float: right;
+  width: 196px;
+  margin: 4px 0 16px 30px;
+}
+
+.portrait-card img {
+  display: block;
+  width: 196px;
+  height: auto;
+  border-radius: 6px;
+}
+
+@media (max-width: 560px) {
+  .portrait-card {
+    float: none;
+    width: 60%;
+    max-width: 220px;
+    margin: 0 0 24px;
+  }
+  .portrait-card img {
+    width: 100%;
+  }
+}
+
+/* ── Essay author chip (foot of each essay) ─────────────────── */
+
+.author-chip {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  margin-top: 72px;
+  padding-top: 28px;
+  border-top: 1px solid var(--rule-soft);
+}
+
+.author-chip img {
+  flex: 0 0 56px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #000;
+}
+
+.author-chip .author-bio {
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted);
+  margin: 0;
+}
+
+.author-chip .author-bio strong {
+  display: block;
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--fg);
+  margin-bottom: 2px;
+}
+
+.author-chip .author-bio a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.author-chip .author-bio a:hover {
+  border-bottom-color: var(--accent);
+}
+
 /* ── Footer ─────────────────────────────────────────────────── */
 
 footer {
@@ -564,7 +638,9 @@ h1.hero {
   .skip-link,
   .essays-more,
   .archive-back,
-  .about-elsewhere {
+  .about-elsewhere,
+  .author-chip,
+  .portrait-card {
     display: none !important;
   }
 
