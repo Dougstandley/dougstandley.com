@@ -480,6 +480,11 @@ article hr::after {
   grid-area: avatar;
   width: 56px;
   height: 56px;
+  min-width: 56px;
+  min-height: 56px;
+  aspect-ratio: 1 / 1;
+  align-self: center;
+  display: block;
   border-radius: 50%;
   object-fit: cover;
   background: #000;
