@@ -467,6 +467,21 @@ article hr::after {
   margin-top: 72px;
   padding-top: 28px;
   border-top: 1px solid var(--rule-soft);
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.author-chip .author-avatar {
+  flex: none;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.author-chip .author-text {
+  flex: 1;
 }
 
 .author-chip .author-name {
