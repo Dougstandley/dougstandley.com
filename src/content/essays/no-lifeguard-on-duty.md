@@ -4,7 +4,7 @@ description: "Most people read the sign as a warning. I read it as orientation â
 status: published
 published: 2026-05-10
 tags: [identity]
-related: [where-you-come-from-is-gone, the-map-goes-quiet, the-last-5-percent]
+related: [where-you-come-from-is-gone, the-map-goes-quiet, the-last-5-percent, fewer-secrets]
 ---
 
 There is a sign I keep returning to:

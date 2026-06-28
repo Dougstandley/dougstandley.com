@@ -3,6 +3,9 @@ title: "Fewer Secrets"
 description: "Professional discretion quietly became personal silence."
 status: published
 published: 2026-06-28
+tags: [identity]
+references: [the-interruption, no-lifeguard-on-duty]
+related: [no-lifeguard-on-duty]
 ---
 I didn't begin writing because I wanted to become a writer.
 
