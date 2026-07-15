@@ -340,6 +340,29 @@ article hr::after {
   letter-spacing: 0.5em;
 }
 
+/* ── Essay body images ──────────────────────────────────────── */
+
+article figure {
+  margin: 2.4em 0;
+  text-align: center;
+}
+
+article figure img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 6px;
+}
+
+article figcaption {
+  font-family: var(--sans);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--muted);
+  margin-top: 10px;
+}
+
 /* ── Essay reference graph (Referenced / Forthcoming) ───────── */
 
 .essay-graph {

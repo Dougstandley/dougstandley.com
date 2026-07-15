@@ -3,7 +3,8 @@ import { glob } from 'astro/loaders';
 
 // Canonical tag vocabulary (v.1.0). Provisional — see PUBLISHING.md § Tags.
 // Out-of-vocabulary tags fail validation by design.
-export const TAGS = ['agentic-ux', 'governance', 'transformation', 'identity'] as const;
+// 'human-judgment' added 2026-07-15 (Essay 11, "Something Prior to Intelligence").
+export const TAGS = ['agentic-ux', 'governance', 'transformation', 'identity', 'human-judgment'] as const;
 
 const essays = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/essays' }),

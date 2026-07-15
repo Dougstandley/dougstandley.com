@@ -56,18 +56,19 @@ Fields like `date`, `pubDate`, `slug`, `categories`, `heroImage`, `author` are n
 
 ## Tags
 
-_Vocabulary established 2026-05-14 as part of v.1.0. Provisional — may be revised as the corpus matures._
+_Vocabulary established 2026-05-14 as part of v.1.0. Provisional — may be revised as the corpus matures. Expanded to five values 2026-07-15 (`human-judgment`, Essay 11)._
 
-The canonical tag vocabulary contains four values:
+The canonical tag vocabulary contains five values:
 
 - `agentic-ux` — the human-system interface where AI deployment succeeds or fails (adoption, accountability, last-mile reality)
 - `governance` — institutional structures, oversight, decision rights, accountability frameworks
 - `transformation` — economic and institutional transition, including the conditions and constraints around it
 - `identity` — posture, sovereignty, and selfhood under technological and institutional pressure
+- `human-judgment` — the irreducible human contribution: framing the question, sitting inside uncertainty, owning the stakes that a model cannot
 
 **Rules:**
 
-1. **Closed vocabulary.** Only the four values above are valid. The list is enforced at build time via `z.enum()` in `src/content.config.ts`. Adding a tag means amending the vocabulary in the schema and documenting the change here, not just typing a new value into frontmatter.
+1. **Closed vocabulary.** Only the five values above are valid. The list is enforced at build time via `z.enum()` in `src/content.config.ts`. Adding a tag means amending the vocabulary in the schema and documenting the change here, not just typing a new value into frontmatter.
 2. **Light touch.** One to three tags per essay. An essay that earns only one tag should carry only one. Multi-tagging should reflect substantive overlap, not topical convenience.
 3. **Provisional, not permanent.** The URL permanence rule applies to slugs, not tags. Tags may be merged, split, or renamed as the corpus reveals its shape. When a tag is renamed, update every essay that carries it in the same commit and update this section.
 4. **No hierarchy.** No parent/child tags, no nested categories, no sub-tags. Sparsity is a defining characteristic of the project.
