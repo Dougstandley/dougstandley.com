@@ -18,7 +18,9 @@ const TERRITORIES = [
   { label: 'PERSONAL', cx: 480, cy: 472, rx: 228, ry: 112, lx: 628, ly: 556 },
 ];
 
-const NODES: Record<string, { x: number; y: number; dy: number; legend?: boolean }> = {
+// `label` (optional) overrides the on-map text only; the essay's full title
+// is still used for the accessible aria-label, the essay page, and the homepage.
+const NODES: Record<string, { x: number; y: number; dy: number; legend?: boolean; label?: string }> = {
   'where-you-come-from-is-gone': { x: 168, y: 258, dy: -16 },
   'the-map-goes-quiet':          { x: 262, y: 352, dy: 28 },
   'the-last-5-percent':          { x: 575, y: 162, dy: -16 },
@@ -28,7 +30,7 @@ const NODES: Record<string, { x: number; y: number; dy: number; legend?: boolean
   'trying-to-keep-time':         { x: 452, y: 530, dy: 28 },
   'the-heart-of-the-matter':     { x: 645, y: 505, dy: 28 },
   'something-prior-to-intelligence': { x: 515, y: 388, dy: -16 },
-  'ann-patchett-and-the-people-who-know-us': { x: 292, y: 556, dy: 28 },
+  'ann-patchett-and-the-people-who-know-us': { x: 300, y: 508, dy: 28, label: 'Ann Patchett' },
   'no-lifeguard-on-duty':        { x: 360, y: 410, dy: 26 },
   'fewer-secrets':               { x: 405, y: 322, dy: -18, legend: true },
 };
@@ -106,7 +108,7 @@ const title = (slug: string) => byId.get(slug)?.data.title ?? slug;
             <a href={`/essays/${slug}`} aria-label={title(slug)} class={n.legend ? 'node-link node-link--legend' : 'node-link'}>
               <circle cx={n.x} cy={n.y} r={n.legend ? 11 : 6} class={n.legend ? 'node node--legend' : 'node'} />
               <text x={n.x} y={n.y + n.dy} text-anchor="middle" class={n.legend ? 'node-label node-label--legend' : 'node-label'}>
-                {title(slug)}
+                {n.label ?? title(slug)}
               </text>
               {n.legend && (
                 <text x={n.x} y={n.y + 24} text-anchor="middle" class="legend-tag">THE LEGEND</text>
