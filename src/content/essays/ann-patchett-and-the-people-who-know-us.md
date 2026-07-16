@@ -1,5 +1,6 @@
 ---
 title: "Ann Patchett and the People Who Know Us"
+shortTitle: "Ann Patchett"
 description: "Patchett writes about the people who truly know us, the witnesses, the ones who carry the evidence."
 status: published
 published: 2026-07-16

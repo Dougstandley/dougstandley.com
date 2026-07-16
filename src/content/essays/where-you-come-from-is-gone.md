@@ -1,5 +1,6 @@
 ---
 title: "Where You Come From Is Gone"
+shortTitle: "Where You Come From"
 description: "A line from Flannery O'Connor, a recursive conversation with two frontier AI models, and the question of how humans stay sovereign when complexity outpaces our unaided minds."
 status: published
 published: 2026-05-11

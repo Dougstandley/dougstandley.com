@@ -1,5 +1,6 @@
 ---
 title: "Something Prior to Intelligence"
+shortTitle: "Something Prior"
 description: "A strategy consultant watches an afternoon of AI reproduce work that once took weeks — and finds that the thing worth keeping was never the output, but the willingness to stay inside the question."
 status: published
 published: 2026-07-11

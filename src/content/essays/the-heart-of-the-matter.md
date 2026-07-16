@@ -1,5 +1,6 @@
 ---
 title: "The Heart of the Matter"
+shortTitle: "Heart of the Matter"
 description: "Trust arrives much slower than authority."
 status: published
 published: 2026-06-20

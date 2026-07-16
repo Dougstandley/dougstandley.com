@@ -44,6 +44,7 @@ Body in markdown starts here.
 | Field | Required | Type | Purpose |
 |-------|----------|------|---------|
 | `title` | Yes | string | Display title; rendered as `<h1>` on the essay page and in the homepage list. |
+| `shortTitle` | No | string | Short reference name shown **only** on the Map of the Work. See § Short titles. |
 | `description` | No (recommended) | string | One-line summary. Drives `<meta name="description">` and `og:description` — affects SEO and link-preview cards. |
 | `status` | Yes (effectively) | `draft` or `published` | Defaults to `draft` if omitted. Drafts route locally but never appear on the homepage or in production. Must be `published` to ship. |
 | `published` | No (recommended) | date `YYYY-MM-DD` | Drives reverse-chronological sort on the homepage. Without it the essay sorts last. |
@@ -74,6 +75,23 @@ The canonical tag vocabulary contains five values:
 4. **No hierarchy.** No parent/child tags, no nested categories, no sub-tags. Sparsity is a defining characteristic of the project.
 
 To extend the vocabulary, edit the `TAGS` constant in `src/content.config.ts` and update the list and definitions above in the same commit.
+
+## Short titles (map reference names)
+
+_Added 2026-07-16. Interim aid for Map label density while the fuller scale/auto-adapt design is pending._
+
+`shortTitle` is an optional frontmatter string that supplies a shorter **reference name** for an essay, shown only on the Map of the Work (`/map`). Everywhere else — the essay page `<h1>`, the homepage list, the `<title>` tag, OG cards, and the map node's accessible `aria-label` — the full `title` is used unchanged. Slugs and URLs are unaffected.
+
+**When to use it:** only when the full title is long enough to overflow its cluster on the map and pull the eye to text before structure. Already-short titles (e.g. *The Interruption*, *The Last 5%*, *Fewer Secrets*) need no `shortTitle`. Keep the reference name faithful to the title — a recognizable contraction, not a re-titling.
+
+```yaml
+title: "Ann Patchett and the People Who Know Us"
+shortTitle: "Ann Patchett"
+```
+
+The map reads `shortTitle` via a `label()` helper in `src/pages/map.astro` (`data.shortTitle ?? title`). No map.astro edit is needed to add or change a reference name — it lives entirely in the essay's frontmatter.
+
+Current reference names: *Where You Come From* · *Hello World* · *Something Prior* · *Heart of the Matter* · *No Lifeguard* · *Second Stanford* · *Keeping Time* · *Ann Patchett*.
 
 ## References and forthcoming
 

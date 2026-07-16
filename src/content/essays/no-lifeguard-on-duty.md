@@ -1,5 +1,6 @@
 ---
 title: "No Lifeguard on Duty"
+shortTitle: "No Lifeguard"
 description: "Most people read the sign as a warning. I read it as orientation — a working notebook on staying sovereign as intelligent systems reset the rules."
 status: published
 published: 2026-05-10

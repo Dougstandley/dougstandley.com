@@ -1,5 +1,6 @@
 ---
 title: "Trying to Keep Time"
+shortTitle: "Keeping Time"
 description: "Music as foundation, performance as identity, and a daughter who knows her father well enough to send the right link."
 status: published
 published: 2026-05-18

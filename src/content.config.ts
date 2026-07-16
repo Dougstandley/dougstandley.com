@@ -10,6 +10,10 @@ const essays = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/essays' }),
   schema: z.object({
     title: z.string(),
+    // Short reference name for the Map of the Work only. Full `title` is still
+    // used for the essay page, homepage, and accessible labels. Interim aid for
+    // map label density; see PUBLISHING.md § Short titles (map reference names).
+    shortTitle: z.string().optional(),
     description: z.string().optional(),
     status: z.enum(['draft', 'published']).default('draft'),
     started: z.coerce.date().optional(),
