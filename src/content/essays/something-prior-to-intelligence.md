@@ -4,6 +4,7 @@ description: "A strategy consultant watches an afternoon of AI reproduce work th
 status: published
 published: 2026-07-11
 tags: [identity, transformation, human-judgment]
+related: [the-heart-of-the-matter, the-second-stanford]
 ---
 
 There is a moment I keep returning to.
